@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyBodyGuide — Eat Smart, Live Better</title>
+<meta name="description" content="Free, science-based nutrition tools: calculate your calories and macros, browse a halal food database, discover nutrition facts, and read evidence-based health articles — in 9 languages.">
+<link rel="canonical" href="https://www.mybodyguide.example/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MyBodyGuide — Eat Smart, Live Better">
+<meta property="og:description" content="Free, science-based nutrition tools: BMI/TDEE calculator, halal food database, nutrition facts wheel, and health articles.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600;700&family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   MyBodyGuide — Stylesheet
+   Design tokens: Soft Green + White + Light Blue, premium medical feel.
+   Display face: Manrope (Almarai for Arabic). Body face: Inter.
+   ========================================================================== */
+
+:root{
+  /* Color tokens */
+  --mint-50:#F2FBF6;
+  --sky-50:#EEF8FD;
+  --green-700:#0E7A47;
+  --green-600:#159A5B;
+  --green-500:#2FBE7E;
+  --green-300:#9EE6BE;
+  --blue-700:#155F9E;
+  --blue-600:#1C7FD1;
+  --blue-500:#3AA0E8;
+  --blue-300:#A9D8F7;
+  --ink-900:#0D251F;
+  --ink-700:#33544A;
+  --ink-500:#5C7B72;
+  --line:#DCEEE6;
+  --white:#FFFFFF;
+  --danger:#D64545;
+
+  --grad-brand: linear-gradient(120deg, var(--green-500) 0%, var(--blue-500) 100%);
+  --grad-hero: linear-gradient(160deg, var(--mint-50) 0%, var(--sky-50) 55%, #FFFFFF 100%);
+
+  --shadow-sm: 0 2px 10px rgba(13,37,31,0.06);
+  --shadow-md: 0 10px 30px rgba(13,37,31,0.10);
+  --shadow-lg: 0 24px 60px rgba(13,37,31,0.14);
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --font-display: 'Manrope', 'Almarai', sans-serif;
+  --font-body: 'Inter', 'Almarai', sans-serif;
+
+  --container: 1180px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink-900);
+  background:var(--white);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  line-height:1.15;
+  margin:0 0 .5em;
+  font-weight:800;
+  letter-spacing:-0.01em;
+}
+p{ margin:0 0 1em; color:var(--ink-700); }
+a{ color:var(--blue-600); text-decoration:none; }
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; cursor:pointer; }
+ul{ margin:0; padding:0; list-style:none; }
+
+[dir="rtl"] body{ font-family:var(--font-body); }
+[dir="rtl"] .container{ direction:rtl; }
+
+.container{ max-width:var(--container); margin:0 auto; padding:0 24px; }
+.hidden{ display:none !important; }
+.sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:3px solid var(--blue-500);
+  outline-offset:2px;
+  border-radius:6px;
+}
+
+/* ============ HEADER / NAV ============ */
+.site-header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{ display:flex; align-items:center; gap:20px; padding:12px 24px; }
+.brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.15rem; color:var(--ink-900); }
+.brand img{ height:38px; width:auto; }
+.main-nav{ display:flex; gap:4px; margin-inline-start:auto; flex-wrap:wrap; }
+.main-nav a{
+  padding:10px 14px; border-radius:var(--radius-pill); font-weight:600; font-size:.92rem; color:var(--ink-700);
+  white-space:nowrap; transition:background .2s ease, color .2s ease;
+}
+.main-nav a:hover, .main-nav a.active{ background:var(--mint-50); color:var(--green-700); }
+.header-actions{ display:flex; align-items:center; gap:10px; }
+.lang-select{
+  appearance:none; border:1px solid var(--line); background:var(--white) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="%2333544A"/></svg>') no-repeat right 12px center;
+  padding:9px 30px 9px 14px; border-radius:var(--radius-pill); font-weight:600; font-size:.85rem; color:var(--ink-900);
+}
+[dir="rtl"] .lang-select{ background-position:left 12px center; padding:9px 14px 9px 30px; }
+.nav-toggle{ display:none; background:none; border:1px solid var(--line); border-radius:10px; padding:8px 10px; }
+.nav-toggle span{ display:block; width:20px; height:2px; background:var(--ink-900); margin:4px 0; border-radius:2px; }
+
+@media (max-width: 980px){
+  .main-nav{ display:none; width:100%; flex-direction:column; gap:2px; order:3; }
+  .main-nav.open{ display:flex; }
+  .main-nav a{ width:100%; }
+  .header-inner{ flex-wrap:wrap; }
+  .nav-toggle{ display:block; margin-inline-start:auto; }
+}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:14px 28px; border-radius:var(--radius-pill); font-weight:700; font-size:.95rem;
+  border:none; transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn-primary{ background:var(--grad-brand); color:var(--white); box-shadow:var(--shadow-md); }
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+.btn-secondary{ background:var(--white); color:var(--green-700); border:2px solid var(--green-300); }
+.btn-secondary:hover{ background:var(--mint-50); }
+.btn-block{ width:100%; }
+.btn-sm{ padding:9px 18px; font-size:.85rem; }
+
+/* ============ HERO ============ */
+.hero{
+  background:var(--grad-hero);
+  padding:72px 0 56px;
+  position:relative; overflow:hidden;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(600px 300px at 85% 10%, rgba(58,160,232,.18), transparent 60%),
+              radial-gradient(500px 260px at 10% 90%, rgba(47,190,126,.18), transparent 60%);
+  pointer-events:none;
+}
+.hero-inner{ display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; position:relative; }
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px; background:var(--white); border:1px solid var(--green-300);
+  color:var(--green-700); font-weight:700; font-size:.8rem; padding:6px 14px; border-radius:var(--radius-pill);
+  margin-bottom:18px; box-shadow:var(--shadow-sm);
+}
+.hero h1{ font-size:clamp(2.1rem, 4vw, 3.2rem); color:var(--ink-900); }
+.hero .lede{ font-size:1.1rem; color:var(--ink-700); max-width:52ch; margin-bottom:28px; }
+.hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:36px; }
+.stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.stat-card{
+  background:rgba(255,255,255,.7); backdrop-filter:blur(8px); border:1px solid var(--line);
+  border-radius:var(--radius-md); padding:16px; text-align:center; box-shadow:var(--shadow-sm);
+}
+.stat-num{ font-family:var(--font-display); font-weight:800; font-size:1.6rem; color:var(--green-700); }
+.stat-label{ font-size:.75rem; color:var(--ink-500); font-weight:600; }
+.hero-art{ position:relative; }
+.hero-art svg{ width:100%; height:auto; filter:drop-shadow(var(--shadow-lg)); }
+
+@media (max-width:900px){
+  .hero-inner{ grid-template-columns:1fr; }
+  .stat-grid{ grid-template-columns:repeat(2,1fr); }
+  .hero-art{ order:-1; max-width:340px; margin:0 auto; }
+}
+
+/* ============ SECTIONS / CARDS ============ */
+.section{ padding:64px 0; }
+.section-alt{ background:var(--mint-50); }
+.section-head{ text-align:center; max-width:640px; margin:0 auto 40px; }
+.section-head h2{ font-size:clamp(1.6rem, 3vw, 2.2rem); }
+.card{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm); padding:28px;
+}
+.glass{
+  background:rgba(255,255,255,0.65); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.6);
+}
+
+/* ============ CALCULATOR ============ */
+.calc-layout{ display:grid; grid-template-columns:1fr; gap:28px; }
+.calc-form{ display:grid; gap:20px; }
+.field-group{ display:grid; gap:8px; }
+.field-group label{ font-weight:700; font-size:.9rem; color:var(--ink-900); }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+input[type="number"], select, input[type="text"], input[type="email"], textarea{
+  width:100%; padding:13px 16px; border:1.5px solid var(--line); border-radius:var(--radius-sm);
+  font-size:1rem; color:var(--ink-900); background:var(--white); transition:border-color .2s ease, box-shadow .2s ease;
+}
+input:focus, select:focus, textarea:focus{ border-color:var(--blue-500); box-shadow:0 0 0 4px rgba(58,160,232,.15); outline:none; }
+.pill-toggle{ display:flex; gap:10px; flex-wrap:wrap; }
+.pill-toggle input{ position:absolute; opacity:0; }
+.pill-toggle label{
+  flex:1; text-align:center; padding:13px 16px; border:1.5px solid var(--line); border-radius:var(--radius-sm);
+  font-weight:700; cursor:pointer; transition:all .2s ease; color:var(--ink-700); min-width:110px;
+}
+.pill-toggle input:checked + label{ background:var(--grad-brand); color:var(--white); border-color:transparent; box-shadow:var(--shadow-sm); }
+
+.results-panel{ display:grid; gap:20px; }
+.result-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; }
+.result-tile{
+  background:var(--grad-hero); border:1px solid var(--line); border-radius:var(--radius-md); padding:18px;
+}
+.result-tile .val{ font-family:var(--font-display); font-weight:800; font-size:1.5rem; color:var(--green-700); }
+.result-tile .val small{ font-size:.85rem; font-weight:600; color:var(--ink-500); }
+.result-tile .label{ font-size:.82rem; color:var(--ink-700); font-weight:600; margin-top:4px; }
+.macro-bars{ display:grid; gap:10px; }
+.macro-bar-row{ display:grid; grid-template-columns:110px 1fr 70px; align-items:center; gap:10px; font-size:.85rem; }
+.macro-bar-track{ height:10px; border-radius:var(--radius-pill); background:var(--line); overflow:hidden; }
+.macro-bar-fill{ height:100%; border-radius:var(--radius-pill); }
+.fill-protein{ background:var(--blue-500); }
+.fill-carbs{ background:var(--green-500); }
+.fill-fat{ background:#F2B84B; }
+.progress-visual{ display:flex; align-items:center; gap:18px; }
+.progress-track{ flex:1; height:16px; background:var(--line); border-radius:var(--radius-pill); overflow:hidden; }
+.progress-fill{ height:100%; background:var(--grad-brand); border-radius:var(--radius-pill); transition:width 1s ease; }
+.advice-box{ background:var(--sky-50); border:1px solid var(--blue-300); border-radius:var(--radius-md); padding:18px; }
+
+@media (min-width:940px){
+  .calc-layout{ grid-template-columns:.85fr 1.15fr; align-items:start; }
+}
+
+/* ============ DATABASE TABLE ============ */
+.db-controls{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:24px; }
+.db-controls input, .db-controls select{ max-width:280px; }
+.table-wrap{ overflow-x:auto; border-radius:var(--radius-md); border:1px solid var(--line); }
+table{ width:100%; border-collapse:collapse; font-size:.88rem; min-width:820px; }
+thead th{
+  position:sticky; top:0; background:var(--mint-50); text-align:start; padding:14px 16px; font-weight:800;
+  color:var(--ink-900); border-bottom:1px solid var(--line); cursor:pointer; white-space:nowrap;
+}
+tbody td{ padding:12px 16px; border-bottom:1px solid var(--line); color:var(--ink-700); white-space:nowrap; }
+tbody tr:hover{ background:var(--sky-50); }
+.food-name{ font-weight:700; color:var(--ink-900); }
+.cat-tag{ display:inline-block; background:var(--mint-50); color:var(--green-700); font-size:.7rem; font-weight:700; padding:2px 8px; border-radius:var(--radius-pill); margin-inline-start:8px; }
+
+/* ============ NUTRITION WHEEL ============ */
+.wheel-wrap{ display:flex; flex-direction:column; align-items:center; gap:28px; }
+.wheel-stage{ position:relative; width:min(360px, 80vw); aspect-ratio:1; }
+.wheel-svg{ width:100%; height:100%; transition:transform 4.5s cubic-bezier(.17,.67,.16,1); filter:drop-shadow(var(--shadow-lg)); }
+.wheel-pointer{
+  position:absolute; top:-6px; left:50%; transform:translateX(-50%);
+  width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent; border-top:22px solid var(--blue-700); z-index:2;
+}
+.fact-card{
+  max-width:560px; text-align:center; padding:28px 32px; border-radius:var(--radius-lg);
+  background:var(--grad-hero); border:1px solid var(--line); box-shadow:var(--shadow-md);
+  min-height:110px; display:flex; align-items:center; justify-content:center;
+}
+.fact-card p{ font-size:1.05rem; font-weight:600; color:var(--ink-900); margin:0; }
+.fact-tag{ display:inline-block; margin-bottom:10px; font-size:.72rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--blue-600); }
+#confetti-canvas{ position:fixed; inset:0; pointer-events:none; z-index:999; }
+
+/* ============ ARTICLES ============ */
+.articles-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
+.article-card{ border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--line); background:var(--white); box-shadow:var(--shadow-sm); transition:transform .2s ease, box-shadow .2s ease; }
+.article-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.article-img{ height:160px; background:var(--grad-brand); }
+.article-body{ padding:20px; }
+.article-cat{ font-size:.72rem; font-weight:800; color:var(--green-700); text-transform:uppercase; letter-spacing:.05em; }
+.article-meta{ display:flex; gap:12px; font-size:.78rem; color:var(--ink-500); margin:10px 0 14px; flex-wrap:wrap; }
+.article-full{ max-width:760px; margin:0 auto; }
+.article-full .article-img{ height:260px; border-radius:var(--radius-lg); margin-bottom:24px; }
+.toc-box{ background:var(--mint-50); border-radius:var(--radius-md); padding:20px 24px; margin-bottom:28px; }
+.toc-box a{ display:block; padding:4px 0; font-weight:600; }
+.faq-item{ border-bottom:1px solid var(--line); padding:16px 0; }
+.faq-item h4{ font-size:1rem; margin-bottom:6px; }
+.tag-list{ display:flex; gap:8px; flex-wrap:wrap; margin:16px 0; }
+.tag-chip{ background:var(--sky-50); color:var(--blue-700); font-size:.75rem; font-weight:700; padding:5px 12px; border-radius:var(--radius-pill); }
+.share-row{ display:flex; gap:10px; margin:20px 0; }
+.share-btn{ width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--mint-50); color:var(--green-700); }
+.back-link{ display:inline-flex; align-items:center; gap:6px; font-weight:700; margin-bottom:24px; }
+
+/* ============ BOOKS ============ */
+.books-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; }
+.book-card{ border-radius:var(--radius-lg); border:1px solid var(--line); overflow:hidden; background:var(--white); box-shadow:var(--shadow-sm); }
+.book-cover{ height:220px; background:var(--grad-brand); position:relative; display:flex; align-items:center; justify-content:center; }
+.book-cover span{ color:var(--white); font-family:var(--font-display); font-weight:800; font-size:1.2rem; text-align:center; padding:0 20px; }
+.book-body{ padding:18px; }
+.book-price{ font-family:var(--font-display); font-weight:800; color:var(--green-700); font-size:1.2rem; margin:10px 0; }
+.book-actions{ display:flex; gap:10px; }
+
+/* ============ CONTACT / FORMS ============ */
+.contact-layout{ display:grid; grid-template-columns:1fr; gap:32px; }
+@media (min-width:900px){ .contact-layout{ grid-template-columns:1.1fr .9fr; } }
+.error-msg{ color:var(--danger); font-size:.82rem; font-weight:600; display:none; }
+.error-msg.show{ display:block; }
+input.invalid, textarea.invalid{ border-color:var(--danger); }
+.success-banner{
+  background:var(--mint-50); border:1px solid var(--green-300); color:var(--green-700); font-weight:700;
+  padding:16px 20px; border-radius:var(--radius-md); display:none; margin-bottom:20px;
+}
+.success-banner.show{ display:block; }
+.map-embed{ border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line); height:280px; background:var(--mint-50); display:flex; align-items:center; justify-content:center; color:var(--ink-500); }
+.social-row{ display:flex; gap:12px; margin-top:20px; }
+.social-row a{ width:42px; height:42px; border-radius:50%; background:var(--mint-50); display:flex; align-items:center; justify-content:center; color:var(--green-700); }
+
+/* ============ LEGAL / SIMPLE PAGES ============ */
+.legal-content{ max-width:760px; margin:0 auto; }
+.legal-content h3{ margin-top:28px; font-size:1.15rem; }
+.breadcrumbs{ font-size:.85rem; color:var(--ink-500); margin-bottom:18px; }
+.breadcrumbs a{ color:var(--ink-500); font-weight:600; }
+.breadcrumbs .sep{ margin:0 6px; }
+
+/* ============ FOOTER ============ */
+.site-footer{ background:var(--ink-900); color:#DCEEE6; padding:56px 0 24px; }
+.footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:32px; margin-bottom:36px; }
+.footer-brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.footer-brand img{ height:32px; filter:brightness(0) invert(1); }
+.footer-brand span{ font-family:var(--font-display); font-weight:800; color:var(--white); }
+.site-footer h4{ color:var(--white); font-size:.9rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px; }
+.site-footer a{ color:#AFCFC4; font-size:.9rem; display:block; padding:4px 0; }
+.site-footer a:hover{ color:var(--white); }
+.newsletter-row{ display:flex; gap:8px; margin-top:10px; }
+.newsletter-row input{ flex:1; }
+.footer-bottom{ border-top:1px solid rgba(255,255,255,0.12); padding-top:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.82rem; color:#8FB6A9; }
+@media (max-width:820px){ .footer-grid{ grid-template-columns:1fr 1fr; } }
+@media (max-width:520px){ .footer-grid{ grid-template-columns:1fr; } }
+
+/* ============ ANIMATIONS ============ */
+@keyframes floatY{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
+.float{ animation:floatY 5s ease-in-out infinite; }
+@keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+.fade-up{ animation:fadeUp .6s ease both; }
+@keyframes spinConfettiFall{ to{ transform:translateY(110vh) rotate(360deg); opacity:0; } }
+
+/* Page section visibility (SPA-style routing) */
+.page-section{ display:none; }
+.page-section.active{ display:block; }
+
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MyBodyGuide",
+  "url": "https://www.mybodyguide.example/",
+    "sameAs": []
+}
+</script>
+</head>
+<body>
+
+<canvas id="confettiCanvas"></canvas>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="#" class="brand" data-page="page-home">
+      <img src="data:image/png;base64,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" alt="MyBodyGuide logo">
+      <span data-i18n="site_name">MyBodyGuide</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="#" data-page="page-home" data-i18n="nav_home">Home</a>
+      <a href="#" data-page="page-calculator" data-i18n="nav_calculator">Healthy Calculator</a>
+      <a href="#" data-page="page-database" data-i18n="nav_database">Calories Database</a>
+      <a href="#" data-page="page-wheel" data-i18n="nav_wheel">Nutrition Wheel</a>
+      <a href="#" data-page="page-articles" data-i18n="nav_articles">Articles</a>
+      <a href="#" data-page="page-books" data-i18n="nav_books">Digital Books</a>
+      <a href="#" data-page="page-about" data-i18n="nav_about">About Us</a>
+      <a href="#" data-page="page-contact" data-i18n="nav_contact">Contact Us</a>
+    </nav>
+    <div class="header-actions">
+      <select class="lang-select" id="langSelect" aria-label="Select language"></select>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section class="page-section" id="page-home">
+  <div class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">🌿 <span data-i18n="site_subtitle">Eat Smart • Live Better</span></span>
+        <h1 data-i18n="hero_title">Understand your body. Eat with confidence.</h1>
+        <p class="lede" data-i18n="hero_subtitle">Free, science-based tools to calculate your calories, explore healthy foods, and build lifelong habits — in your language.</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn btn-primary" data-page="page-calculator" data-i18n="hero_cta">Start Your Free Calculation</a>
+          <a href="#" class="btn btn-secondary" data-page="page-wheel" data-i18n="wheel_spin">SPIN THE WHEEL</a>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num"><span data-counter="110">0</span></div><div class="stat-label" data-i18n="hero_stat_foods">Foods in database</div></div>
+          <div class="stat-card"><div class="stat-num"><span data-counter="104">0</span></div><div class="stat-label" data-i18n="hero_stat_facts">Nutrition facts</div></div>
+          <div class="stat-card"><div class="stat-num"><span data-counter="9">0</span></div><div class="stat-label" data-i18n="hero_stat_langs">Languages</div></div>
+          <div class="stat-card"><div class="stat-num"><span data-counter="50" data-counter-suffix="k+">0</span></div><div class="stat-label" data-i18n="hero_stat_users">People helped</div></div>
+        </div>
+      </div>
+      <div class="hero-art float" aria-hidden="true">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="200" r="170" fill="#EEF8FD"/>
+          <circle cx="200" cy="200" r="130" fill="#F2FBF6"/>
+          <path d="M200 90 C240 90 270 130 260 175 C300 185 320 230 295 265 C310 300 285 335 245 335 C230 360 190 365 165 345 C125 355 90 325 95 285 C65 265 65 220 95 195 C90 155 125 120 165 120 C175 100 190 90 200 90 Z" fill="#2FBE7E"/>
+          <circle cx="200" cy="150" r="18" fill="#1C7FD1"/>
+          <path d="M150 260 Q200 220 250 260 Q220 300 200 300 Q180 300 150 260 Z" fill="#0E7A47" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="calc_title">Body Analysis Calculator</h2>
+        <p data-i18n="calc_subtitle">Answer a few questions to get your personalized results.</p>
+      </div>
+      <div class="articles-grid">
+        <div class="card">
+          <h3 data-i18n="nav_database">Calories Database</h3>
+          <p>Search halal, wholesome foods with full macro breakdowns.</p>
+          <a href="#" class="btn btn-secondary btn-sm" data-page="page-database" data-i18n="db_search">Search foods...</a>
+        </div>
+        <div class="card">
+          <h3 data-i18n="nav_wheel">Nutrition Wheel</h3>
+          <p>Spin to learn a new evidence-based nutrition fact every time.</p>
+          <a href="#" class="btn btn-secondary btn-sm" data-page="page-wheel" data-i18n="wheel_spin">SPIN THE WHEEL</a>
+        </div>
+        <div class="card">
+          <h3 data-i18n="nav_articles">Articles</h3>
+          <p>Practical, science-informed reads on nutrition and healthy living.</p>
+          <a href="#" class="btn btn-secondary btn-sm" data-page="page-articles" data-i18n="articles_read">Read Article</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section class="page-section" id="page-calculator">
+  <div class="section">
+    <div class="container">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_calculator">Healthy Calculator</span></div>
+      <div class="section-head">
+        <h2 data-i18n="calc_title">Body Analysis Calculator</h2>
+        <p data-i18n="calc_subtitle">Answer a few questions to get your personalized results.</p>
+      </div>
+
+      <div class="calc-layout">
+        <form class="card calc-form" id="calculatorForm">
+          <div class="field-group">
+            <label data-i18n="calc_gender">Gender</label>
+            <div class="pill-toggle">
+              <input type="radio" name="gender" id="genderMale" value="male" checked><label for="genderMale" data-i18n="calc_male">Male</label>
+              <input type="radio" name="gender" id="genderFemale" value="female"><label for="genderFemale" data-i18n="calc_female">Female</label>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="calcAge" data-i18n="calc_age">Age (years)</label>
+              <input type="number" id="calcAge" min="10" max="100" value="30" required>
+            </div>
+            <div class="field-group">
+              <label for="calcHeight" data-i18n="calc_height">Height (cm)</label>
+              <input type="number" id="calcHeight" min="100" max="250" value="170" required>
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="calcWeight" data-i18n="calc_weight">Weight (kg)</label>
+            <input type="number" id="calcWeight" min="30" max="300" value="70" required>
+          </div>
+          <div class="field-group">
+            <label for="calcActivity" data-i18n="calc_activity">Activity Level</label>
+            <select id="calcActivity">
+              <option value="sedentary" data-i18n="act_sedentary">Sedentary</option>
+              <option value="light" data-i18n="act_light">Light</option>
+              <option value="moderate" selected data-i18n="act_moderate">Moderate</option>
+              <option value="active" data-i18n="act_active">Active</option>
+              <option value="athlete" data-i18n="act_athlete">Athlete</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label data-i18n="calc_goal">Goal</label>
+            <div class="pill-toggle">
+              <input type="radio" name="goal" id="goalLose" value="lose" checked><label for="goalLose" data-i18n="goal_lose">Lose Weight</label>
+              <input type="radio" name="goal" id="goalMaintain" value="maintain"><label for="goalMaintain" data-i18n="goal_maintain">Maintain</label>
+              <input type="radio" name="goal" id="goalGain" value="gain"><label for="goalGain" data-i18n="goal_gain">Gain Weight</label>
+            </div>
+          </div>
+          <div style="display:flex; gap:12px;">
+            <button type="submit" class="btn btn-primary btn-block" data-i18n="calc_submit">Calculate My Results</button>
+            <button type="button" id="resetBtn" class="btn btn-secondary" data-i18n="calc_reset">Reset</button>
+          </div>
+        </form>
+
+        <div class="results-panel hidden" id="resultsPanel">
+          <div class="card">
+            <h3 data-i18n="res_title">Your Personalized Results</h3>
+            <div class="result-grid">
+              <div class="result-tile"><div class="val" id="res-bmi">--</div><div class="label" data-i18n="res_bmi">BMI</div><div id="res-bmi-cat" style="font-weight:700;font-size:.85rem;"></div></div>
+              <div class="result-tile"><div class="val" id="res-ideal">--</div><div class="label" data-i18n="res_ideal">Ideal Weight Range</div></div>
+              <div class="result-tile"><div class="val" id="res-bmr">--</div><div class="label" data-i18n="res_bmr">BMR</div></div>
+              <div class="result-tile"><div class="val" id="res-tdee">--</div><div class="label" data-i18n="res_tdee">TDEE</div></div>
+              <div class="result-tile"><div class="val" id="res-calories">--</div><div class="label" data-i18n="res_calories">Recommended Daily Calories</div></div>
+              <div class="result-tile"><div class="val" id="res-water">--</div><div class="label" data-i18n="res_water">Daily Water Intake</div></div>
+              <div class="result-tile"><div class="val" id="res-weekly">--</div><div class="label" data-i18n="res_weekly">Estimated Weekly Change</div></div>
+              <div class="result-tile"><div class="val" id="res-monthly">--</div><div class="label" data-i18n="res_monthly">Estimated Monthly Change</div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 data-i18n="calc_goal">Macronutrients</h3>
+            <div class="macro-bars">
+              <div class="macro-bar-row">
+                <span data-i18n="res_protein">Protein</span>
+                <div class="macro-bar-track"><div class="macro-bar-fill fill-protein" id="macro-protein-fill" style="width:0%"></div></div>
+                <span id="macro-protein-val">0 g</span>
+              </div>
+              <div class="macro-bar-row">
+                <span data-i18n="res_carbs">Carbs</span>
+                <div class="macro-bar-track"><div class="macro-bar-fill fill-carbs" id="macro-carbs-fill" style="width:0%"></div></div>
+                <span id="macro-carbs-val">0 g</span>
+              </div>
+              <div class="macro-bar-row">
+                <span data-i18n="res_fat">Fat</span>
+                <div class="macro-bar-track"><div class="macro-bar-fill fill-fat" id="macro-fat-fill" style="width:0%"></div></div>
+                <span id="macro-fat-val">0 g</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 data-i18n="res_diff">Weight Goal Estimator</h3>
+            <div class="result-grid" style="margin-bottom:16px;">
+              <div class="result-tile"><div class="val" id="res-current">--</div><div class="label" data-i18n="res_current">Current Weight</div></div>
+              <div class="result-tile"><div class="val" id="res-diff">--</div><div class="label" data-i18n="res_diff">Weight Difference</div></div>
+              <div class="result-tile"><div class="val" id="res-time" style="font-size:1.1rem;">--</div><div class="label" data-i18n="res_time">Estimated Time Required</div></div>
+            </div>
+            <div class="progress-visual">
+              <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+            </div>
+          </div>
+
+          <div class="advice-box">
+            <strong data-i18n="res_advice_title">Personalized Advice</strong>
+            <p id="res-advice" style="margin:8px 0 0;"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATABASE ============ -->
+<section class="page-section" id="page-database">
+  <div class="section">
+    <div class="container">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_database">Calories Database</span></div>
+      <div class="section-head">
+        <h2 data-i18n="db_title">Calories Database</h2>
+        <p data-i18n="db_subtitle">Search halal, wholesome foods and see their full nutrition breakdown.</p>
+      </div>
+      <div class="db-controls">
+        <input type="text" id="dbSearch" data-i18n-placeholder="db_search" placeholder="Search foods...">
+        <select id="dbCategoryFilter"></select>
+      </div>
+      <div class="table-wrap">
+        <table id="dbTable">
+          <thead>
+            <tr>
+              <th data-sort="name" data-i18n="db_col_food">Food</th>
+              <th data-i18n="db_col_serving">Serving</th>
+              <th data-sort="kcal" data-i18n="db_col_cal">Calories</th>
+              <th data-sort="protein" data-i18n="db_col_protein">Protein (g)</th>
+              <th data-sort="carbs" data-i18n="db_col_carbs">Carbs (g)</th>
+              <th data-sort="fat" data-i18n="db_col_fat">Fat (g)</th>
+              <th data-sort="fiber" data-i18n="db_col_fiber">Fiber (g)</th>
+              <th data-sort="sugar" data-i18n="db_col_sugar">Sugar (g)</th>
+              <th data-sort="sodium" data-i18n="db_col_sodium">Sodium (mg)</th>
+            </tr>
+          </thead>
+          <tbody id="dbTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHEEL ============ -->
+<section class="page-section" id="page-wheel">
+  <div class="section">
+    <div class="container">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_wheel">Nutrition Wheel</span></div>
+      <div class="section-head">
+        <h2 data-i18n="wheel_title">Nutrition Knowledge Wheel</h2>
+        <p data-i18n="wheel_subtitle">Spin to reveal a bite-sized, evidence-based nutrition fact.</p>
+      </div>
+      <div class="wheel-wrap">
+        <div class="wheel-stage">
+          <div class="wheel-pointer"></div>
+          <svg id="wheelSvg" class="wheel-svg" viewBox="0 0 360 360"></svg>
+        </div>
+        <button class="btn btn-primary" id="spinBtn" data-i18n="wheel_spin">SPIN THE WHEEL</button>
+        <div class="fact-card hidden" id="factCard">
+          <div>
+            <span class="fact-tag" id="factTag"></span>
+            <p id="factText"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARTICLES LIST ============ -->
+<section class="page-section" id="page-articles">
+  <div class="section">
+    <div class="container">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_articles">Articles</span></div>
+      <div class="section-head">
+        <h2 data-i18n="articles_title">Healthy Articles</h2>
+        <p data-i18n="articles_subtitle">Evidence-informed reads on nutrition and healthy living.</p>
+      </div>
+      <div class="articles-grid" id="articlesGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARTICLE DETAIL ============ -->
+<section class="page-section" id="page-article-detail">
+  <div class="section">
+    <div class="container" id="articleDetail"></div>
+  </div>
+</section>
+
+<!-- ============ BOOKS ============ -->
+<section class="page-section" id="page-books">
+  <div class="section">
+    <div class="container">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_books">Digital Books</span></div>
+      <div class="section-head">
+        <h2 data-i18n="books_title">Digital Books</h2>
+        <p data-i18n="books_subtitle">Practical guides to help you eat well and live better.</p>
+      </div>
+      <div class="books-grid" id="booksGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="page-section" id="page-about">
+  <div class="section">
+    <div class="container legal-content">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_about">About Us</span></div>
+      <h2 data-i18n="about_title">About Us</h2>
+      <p>MyBodyGuide was created with one simple belief: everyone deserves clear, trustworthy nutrition guidance, in their own language, free of charge.</p>
+      <h3>Our Mission</h3>
+      <p>To make evidence-based nutrition knowledge accessible to everyone — regardless of background, budget, or location — through free calculators, an easy-to-search food database, and bite-sized educational content.</p>
+      <h3>Our Vision</h3>
+      <p>A world where understanding your own body and making informed food choices is simple, welcoming, and available in the language you think in.</p>
+      <h3>Our Goals</h3>
+      <p>We aim to constantly expand our halal food database, keep our nutrition facts aligned with recognized public health guidance, and grow our language coverage so more people can use MyBodyGuide comfortably.</p>
+      <h3>Our Commitment</h3>
+      <p>We are committed to a healthy-lifestyle-first approach: no fad diets, no miracle cures, and no unsafe calorie targets — just practical, science-informed tools and content.</p>
+      <h3>Educational Purpose</h3>
+      <p>MyBodyGuide is an educational platform. It does not replace personalized advice from a qualified doctor, dietitian, or other healthcare professional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="page-section" id="page-contact">
+  <div class="section">
+    <div class="container">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_contact">Contact Us</span></div>
+      <div class="section-head">
+        <h2 data-i18n="contact_title">Contact Us</h2>
+        <p data-i18n="contact_subtitle">Questions, feedback, or partnership ideas? We'd love to hear from you.</p>
+      </div>
+      <div class="contact-layout">
+        <form class="card" id="contactForm" novalidate>
+          <div id="contactSuccess" class="success-banner" data-i18n="contact_success">Thank you! Your message has been sent successfully.</div>
+          <div class="field-group" style="margin-bottom:16px;">
+            <label for="contactName" data-i18n="contact_name">Name</label>
+            <input type="text" id="contactName" required>
+            <span class="error-msg" id="contactName-error"></span>
+          </div>
+          <div class="field-group" style="margin-bottom:16px;">
+            <label for="contactEmail" data-i18n="contact_email">Email</label>
+            <input type="email" id="contactEmail" required>
+            <span class="error-msg" id="contactEmail-error"></span>
+          </div>
+          <div class="field-group" style="margin-bottom:16px;">
+            <label for="contactSubject" data-i18n="contact_subject">Subject</label>
+            <input type="text" id="contactSubject" required>
+            <span class="error-msg" id="contactSubject-error"></span>
+          </div>
+          <div class="field-group" style="margin-bottom:20px;">
+            <label for="contactMessage" data-i18n="contact_message">Message</label>
+            <textarea id="contactMessage" rows="5" required></textarea>
+            <span class="error-msg" id="contactMessage-error"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" data-i18n="contact_send">Send Message</button>
+          <p style="font-size:.75rem;color:var(--ink-500);margin-top:10px;">This form is protected against spam and does not store your data anywhere except to send your message.</p>
+        </form>
+        <div>
+          <div class="card" style="margin-bottom:20px;">
+            <h4 data-i18n="contact_info_title">Contact Information</h4>
+            <p>📧 <a href="mailto:muzzjat@gmail.com">muzzjat@gmail.com</a></p>
+          </div>
+          <div class="map-embed">🗺️ Google Maps placeholder</div>
+          <div class="social-row" aria-label="Social media">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="X / Twitter">X</a>
+            <a href="#" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIVACY POLICY ============ -->
+<section class="page-section" id="page-privacy">
+  <div class="section">
+    <div class="container legal-content">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_privacy">Privacy Policy</span></div>
+      <h2 data-i18n="privacy_title">Privacy Policy</h2>
+      <p>This Privacy Policy explains how MyBodyGuide ("we", "us") collects, uses, and protects information when you use this website.</p>
+      <h3>Information We Collect</h3>
+      <p>We may collect information you voluntarily provide (such as your name and email through the contact form or newsletter), and non-identifying technical information (such as browser type, pages visited, and approximate location) collected automatically through analytics tools.</p>
+      <h3>Cookies</h3>
+      <p>We use cookies and similar technologies to remember your language preference, understand how visitors use the site, and, where applicable, to support advertising.</p>
+      <h3>Analytics</h3>
+      <p>We may use analytics services (such as Google Analytics) to understand aggregate site usage. This data is generally anonymized or pseudonymized.</p>
+      <h3>Advertising</h3>
+      <p>We may display advertisements, including through Google AdSense. Third-party vendors may use cookies to serve ads based on your prior visits to this or other websites. You can opt out of personalized advertising through your browser or ad settings.</p>
+      <h3>Your Rights (GDPR)</h3>
+      <p>If you are located in the European Economic Area, you have the right to access, correct, delete, or export your personal data, and to object to or restrict certain processing. To exercise these rights, contact us at <a href="mailto:muzzjat@gmail.com">muzzjat@gmail.com</a>.</p>
+      <h3>Data Retention</h3>
+      <p>We retain contact form submissions only as long as necessary to respond to your inquiry, unless a longer retention period is required by law.</p>
+      <h3>Children's Privacy</h3>
+      <p>This website is not directed at children under 13, and we do not knowingly collect personal information from children.</p>
+      <h3>Changes to This Policy</h3>
+      <p>We may update this Privacy Policy from time to time. Continued use of the site after changes constitutes acceptance of the revised policy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TERMS ============ -->
+<section class="page-section" id="page-terms">
+  <div class="section">
+    <div class="container legal-content">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_terms">Terms & Conditions</span></div>
+      <h2 data-i18n="terms_title">Terms & Conditions</h2>
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing or using MyBodyGuide, you agree to be bound by these Terms & Conditions. If you do not agree, please discontinue use of the website.</p>
+      <h3>2. Use of the Website</h3>
+      <p>MyBodyGuide is provided for general educational and informational purposes only. You agree to use the website lawfully and not to misuse any calculators, content, or features.</p>
+      <h3>3. No Professional Advice</h3>
+      <p>Content on this website, including calculators and articles, does not constitute medical, dietary, or professional advice and should not be treated as a substitute for consultation with a qualified healthcare professional.</p>
+      <h3>4. Intellectual Property</h3>
+      <p>All original content, design, and branding on MyBodyGuide are the property of MyBodyGuide unless otherwise stated, and may not be reproduced without permission.</p>
+      <h3>5. Digital Products</h3>
+      <p>Digital books offered for purchase are licensed for personal use only and may not be redistributed or resold.</p>
+      <h3>6. Limitation of Liability</h3>
+      <p>MyBodyGuide is not liable for any damages arising from reliance on information provided on this website, to the fullest extent permitted by law.</p>
+      <h3>7. Changes to Terms</h3>
+      <p>We may revise these Terms at any time. Continued use of the site after changes constitutes acceptance of the new Terms.</p>
+      <h3>8. Contact</h3>
+      <p>For any questions regarding these Terms, please contact <a href="mailto:muzzjat@gmail.com">muzzjat@gmail.com</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DISCLAIMER ============ -->
+<section class="page-section" id="page-disclaimer">
+  <div class="section">
+    <div class="container legal-content">
+      <div class="breadcrumbs"><a href="#" data-page="page-home" data-i18n="breadcrumb_home">Home</a><span class="sep">/</span><span data-i18n="nav_disclaimer">Disclaimer</span></div>
+      <h2 data-i18n="disclaimer_title">Disclaimer</h2>
+      <h3>Medical Disclaimer</h3>
+      <p>MyBodyGuide does not provide medical diagnoses. Calculators and content are general educational tools based on population-level formulas and public health guidance; they are not a substitute for individualized medical advice.</p>
+      <h3>Nutrition Disclaimer</h3>
+      <p>Nutrition values shown in the Calories Database are approximate and sourced from general food composition references. Actual values can vary by brand, preparation method, and portion size.</p>
+      <h3>Affiliate Disclaimer</h3>
+      <p>Some links on this website, including in the Digital Books section, may be affiliate links. We may earn a commission on qualifying purchases at no extra cost to you.</p>
+      <h3>Educational Purpose Only</h3>
+      <p>All content on MyBodyGuide is intended for general educational purposes and general population guidance, not individualized prescription.</p>
+      <h3>Consult a Professional</h3>
+      <p>Please consult a doctor, registered dietitian, or other qualified healthcare professional before making significant changes to your diet, exercise routine, or before using calculator results to guide medical decisions — especially if you are pregnant, nursing, managing a health condition, or taking medication.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="data:image/png;base64,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" alt="MyBodyGuide logo">
+          <span data-i18n="site_name">MyBodyGuide</span>
+        </div>
+        <p style="color:#AFCFC4;font-size:.9rem;" data-i18n="footer_tagline">Evidence-based nutrition guidance for everyone, everywhere.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footer_quick_links">Quick Links</h4>
+        <a href="#" data-page="page-calculator" data-i18n="nav_calculator">Healthy Calculator</a>
+        <a href="#" data-page="page-database" data-i18n="nav_database">Calories Database</a>
+        <a href="#" data-page="page-wheel" data-i18n="nav_wheel">Nutrition Wheel</a>
+        <a href="#" data-page="page-books" data-i18n="nav_books">Digital Books</a>
+      </div>
+      <div>
+        <h4 data-i18n="footer_useful_links">Useful Links</h4>
+        <a href="#" data-page="page-about" data-i18n="nav_about">About Us</a>
+        <a href="#" data-page="page-contact" data-i18n="nav_contact">Contact Us</a>
+        <a href="#" data-page="page-privacy" data-i18n="nav_privacy">Privacy Policy</a>
+        <a href="#" data-page="page-terms" data-i18n="nav_terms">Terms & Conditions</a>
+        <a href="#" data-page="page-disclaimer" data-i18n="nav_disclaimer">Disclaimer</a>
+      </div>
+      <div>
+        <h4 data-i18n="footer_newsletter">Newsletter</h4>
+        <p style="color:#AFCFC4;font-size:.85rem;">Get new articles and nutrition facts in your inbox.</p>
+        <form class="newsletter-row" onsubmit="event.preventDefault(); this.reset(); alert('Thanks for subscribing!');">
+          <input type="email" data-i18n-placeholder="footer_newsletter_placeholder" placeholder="Your email address" required>
+          <button type="submit" class="btn btn-primary btn-sm" data-i18n="footer_subscribe">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yearNow"></span> MyBodyGuide. <span data-i18n="footer_rights">All rights reserved.</span></span>
+      <span>📧 muzzjat@gmail.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ==========================================================================
+   MyBodyGuide — Translations
+   Structure: TRANSLATIONS[langCode][key] = string
+   Supported languages: en, ar, fr, es, tl, ru, uk, it, de
+   Arabic (ar) is RTL; all others are LTR.
+   ========================================================================== */
+
+const LANGUAGES = [
+  { code: "en", label: "English", dir: "ltr" },
+  { code: "ar", label: "العربية", dir: "rtl" },
+  { code: "fr", label: "Français", dir: "ltr" },
+  { code: "es", label: "Español", dir: "ltr" },
+  { code: "tl", label: "Filipino", dir: "ltr" },
+  { code: "ru", label: "Русский", dir: "ltr" },
+  { code: "uk", label: "Українська", dir: "ltr" },
+  { code: "it", label: "Italiano", dir: "ltr" },
+  { code: "de", label: "Deutsch", dir: "ltr" },
+];
+
+const TRANSLATIONS = {
+en: {
+  site_name: "MyBodyGuide", site_subtitle: "Eat Smart • Live Better",
+  nav_home: "Home", nav_calculator: "Healthy Calculator", nav_database: "Calories Database",
+  nav_wheel: "Nutrition Wheel", nav_articles: "Articles", nav_books: "Digital Books",
+  nav_about: "About Us", nav_contact: "Contact Us", nav_privacy: "Privacy Policy",
+  nav_terms: "Terms & Conditions", nav_disclaimer: "Disclaimer",
+  hero_title: "Understand your body. Eat with confidence.",
+  hero_subtitle: "Free, science-based tools to calculate your calories, explore healthy foods, and build lifelong habits — in your language.",
+  hero_cta: "Start Your Free Calculation", hero_stat_foods: "Foods in database", hero_stat_facts: "Nutrition facts",
+  hero_stat_langs: "Languages", hero_stat_users: "People helped",
+  calc_title: "Body Analysis Calculator", calc_subtitle: "Answer a few questions to get your personalized results.",
+  calc_gender: "Gender", calc_male: "Male", calc_female: "Female",
+  calc_age: "Age (years)", calc_height: "Height (cm)", calc_weight: "Weight (kg)",
+  calc_activity: "Activity Level", act_sedentary: "Sedentary (little or no exercise)",
+  act_light: "Light (exercise 1–3 days/week)", act_moderate: "Moderate (exercise 3–5 days/week)",
+  act_active: "Active (exercise 6–7 days/week)", act_athlete: "Athlete (very hard training)",
+  calc_goal: "Goal", goal_lose: "Lose Weight", goal_maintain: "Maintain Weight", goal_gain: "Gain Weight",
+  calc_submit: "Calculate My Results", calc_reset: "Reset",
+  res_title: "Your Personalized Results", res_bmi: "BMI (Body Mass Index)", res_bmi_cat: "BMI Category",
+  res_ideal: "Ideal Weight Range", res_bmr: "BMR (Basal Metabolic Rate)", res_tdee: "TDEE (Total Daily Energy)",
+  res_calories: "Recommended Daily Calories", res_water: "Daily Water Intake", res_protein: "Protein",
+  res_carbs: "Carbohydrates", res_fat: "Fat", res_weekly: "Estimated Weekly Change", res_monthly: "Estimated Monthly Change",
+  res_current: "Current Weight", res_diff: "Weight Difference", res_time: "Estimated Time Required",
+  res_weeks: "weeks", res_months: "months", res_advice_title: "Personalized Advice",
+  bmi_under: "Underweight", bmi_normal: "Normal weight", bmi_over: "Overweight", bmi_obese: "Obese",
+  advice_lose: "A moderate, sustainable calorie deficit combined with regular activity and adequate protein tends to work best for long-term fat loss. Avoid extreme restriction.",
+  advice_maintain: "Keep enjoying a balanced variety of foods and stay active to maintain your current healthy weight.",
+  advice_gain: "A moderate calorie surplus with strength training and enough protein supports healthy weight and muscle gain.",
+  db_title: "Calories Database", db_subtitle: "Search halal, wholesome foods and see their full nutrition breakdown.",
+  db_search: "Search foods...", db_all_categories: "All Categories",
+  db_col_food: "Food", db_col_serving: "Serving", db_col_cal: "Calories", db_col_protein: "Protein (g)",
+  db_col_carbs: "Carbs (g)", db_col_fat: "Fat (g)", db_col_fiber: "Fiber (g)", db_col_sugar: "Sugar (g)", db_col_sodium: "Sodium (mg)",
+  db_no_results: "No foods match your search.",
+  wheel_title: "Nutrition Knowledge Wheel", wheel_subtitle: "Spin to reveal a bite-sized, evidence-based nutrition fact.",
+  wheel_spin: "SPIN THE WHEEL", wheel_spinning: "Spinning...",
+  articles_title: "Healthy Articles", articles_subtitle: "Evidence-informed reads on nutrition and healthy living.",
+  articles_read: "Read Article", articles_min_read: "min read", articles_by: "By", articles_related: "Related Articles",
+  articles_toc: "Table of Contents", articles_faq: "Frequently Asked Questions", articles_share: "Share this article",
+  books_title: "Digital Books", books_subtitle: "Practical guides to help you eat well and live better.",
+  books_featured: "Featured Books", books_new: "New Releases", books_bestsellers: "Best Sellers",
+  books_buy: "Buy Now", books_download: "Download",
+  contact_title: "Contact Us", contact_subtitle: "Questions, feedback, or partnership ideas? We'd love to hear from you.",
+  contact_name: "Name", contact_email: "Email", contact_subject: "Subject", contact_message: "Message",
+  contact_send: "Send Message", contact_success: "Thank you! Your message has been sent successfully.",
+  contact_error_required: "This field is required.", contact_error_email: "Please enter a valid email address.",
+  about_title: "About Us", contact_info_title: "Contact Information",
+  privacy_title: "Privacy Policy", terms_title: "Terms & Conditions", disclaimer_title: "Disclaimer",
+  footer_quick_links: "Quick Links", footer_useful_links: "Useful Links", footer_latest_articles: "Latest Articles",
+  footer_newsletter: "Newsletter", footer_newsletter_placeholder: "Your email address", footer_subscribe: "Subscribe",
+  footer_rights: "All rights reserved.", footer_tagline: "Evidence-based nutrition guidance for everyone, everywhere.",
+  breadcrumb_home: "Home",
+},
+ar: {
+  site_name: "ماي بودي جايد", site_subtitle: "كل بذكاء • عش أفضل",
+  nav_home: "الرئيسية", nav_calculator: "حاسبة الصحة", nav_database: "قاعدة بيانات السعرات",
+  nav_wheel: "عجلة التغذية", nav_articles: "المقالات", nav_books: "الكتب الرقمية",
+  nav_about: "من نحن", nav_contact: "اتصل بنا", nav_privacy: "سياسة الخصوصية",
+  nav_terms: "الشروط والأحكام", nav_disclaimer: "إخلاء المسؤولية",
+  hero_title: "افهم جسدك. تناول طعامك بثقة.", 
+  hero_subtitle: "أدوات مجانية قائمة على العلم لحساب سعراتك الحرارية، واستكشاف الأطعمة الصحية، وبناء عادات صحية تدوم مدى الحياة — بلغتك.",
+  hero_cta: "ابدأ حسابك المجاني", hero_stat_foods: "طعام في القاعدة", hero_stat_facts: "حقيقة غذائية",
+  hero_stat_langs: "لغة", hero_stat_users: "شخص استفاد",
+  calc_title: "حاسبة تحليل الجسم", calc_subtitle: "أجب عن بعض الأسئلة للحصول على نتائجك الشخصية.",
+  calc_gender: "الجنس", calc_male: "ذكر", calc_female: "أنثى",
+  calc_age: "العمر (سنة)", calc_height: "الطول (سم)", calc_weight: "الوزن (كجم)",
+  calc_activity: "مستوى النشاط", act_sedentary: "خامل (نشاط بدني قليل أو معدوم)",
+  act_light: "خفيف (رياضة 1-3 أيام أسبوعياً)", act_moderate: "متوسط (رياضة 3-5 أيام أسبوعياً)",
+  act_active: "نشيط (رياضة 6-7 أيام أسبوعياً)", act_athlete: "رياضي (تدريب مكثف جداً)",
+  calc_goal: "الهدف", goal_lose: "إنقاص الوزن", goal_maintain: "الحفاظ على الوزن", goal_gain: "زيادة الوزن",
+  calc_submit: "احسب نتائجي", calc_reset: "إعادة تعيين",
+  res_title: "نتائجك الشخصية", res_bmi: "مؤشر كتلة الجسم", res_bmi_cat: "تصنيف مؤشر كتلة الجسم",
+  res_ideal: "نطاق الوزن المثالي", res_bmr: "معدل الأيض الأساسي", res_tdee: "إجمالي الطاقة اليومية",
+  res_calories: "السعرات الحرارية اليومية الموصى بها", res_water: "كمية الماء اليومية", res_protein: "البروتين",
+  res_carbs: "الكربوهيدرات", res_fat: "الدهون", res_weekly: "التغير الأسبوعي المتوقع", res_monthly: "التغير الشهري المتوقع",
+  res_current: "الوزن الحالي", res_diff: "فرق الوزن", res_time: "الوقت التقديري المطلوب",
+  res_weeks: "أسابيع", res_months: "أشهر", res_advice_title: "نصيحة شخصية",
+  bmi_under: "نقص الوزن", bmi_normal: "وزن طبيعي", bmi_over: "زيادة الوزن", bmi_obese: "سمنة",
+  advice_lose: "عجز غذائي معتدل ومستدام مع نشاط بدني منتظم وبروتين كافٍ عادة ما يعطي أفضل نتائج طويلة الأمد لفقدان الدهون. تجنب التقييد الشديد.",
+  advice_maintain: "استمر في الاستمتاع بتنوع غذائي متوازن وحافظ على نشاطك للحفاظ على وزنك الصحي الحالي.",
+  advice_gain: "فائض غذائي معتدل مع تمارين المقاومة وبروتين كافٍ يدعم زيادة الوزن والعضلات بشكل صحي.",
+  db_title: "قاعدة بيانات السعرات الحرارية", db_subtitle: "ابحث عن أطعمة حلال وصحية واطّلع على تفاصيلها الغذائية الكاملة.",
+  db_search: "ابحث عن طعام...", db_all_categories: "كل الفئات",
+  db_col_food: "الطعام", db_col_serving: "الحصة", db_col_cal: "السعرات", db_col_protein: "البروتين (جم)",
+  db_col_carbs: "الكربوهيدرات (جم)", db_col_fat: "الدهون (جم)", db_col_fiber: "الألياف (جم)", db_col_sugar: "السكر (جم)", db_col_sodium: "الصوديوم (ملجم)",
+  db_no_results: "لا توجد أطعمة مطابقة لبحثك.",
+  wheel_title: "عجلة المعرفة الغذائية", wheel_subtitle: "أدر العجلة لاكتشاف حقيقة غذائية علمية موجزة.",
+  wheel_spin: "أدر العجلة", wheel_spinning: "جارٍ الدوران...",
+  articles_title: "مقالات صحية", articles_subtitle: "قراءات مبنية على أدلة علمية حول التغذية والحياة الصحية.",
+  articles_read: "اقرأ المقال", articles_min_read: "دقيقة قراءة", articles_by: "بقلم", articles_related: "مقالات ذات صلة",
+  articles_toc: "جدول المحتويات", articles_faq: "الأسئلة الشائعة", articles_share: "شارك هذا المقال",
+  books_title: "الكتب الرقمية", books_subtitle: "أدلة عملية لمساعدتك على الأكل الصحي والعيش الأفضل.",
+  books_featured: "كتب مميزة", books_new: "إصدارات جديدة", books_bestsellers: "الأكثر مبيعاً",
+  books_buy: "اشترِ الآن", books_download: "تحميل",
+  contact_title: "اتصل بنا", contact_subtitle: "أسئلة أو ملاحظات أو أفكار شراكة؟ يسعدنا سماعك.",
+  contact_name: "الاسم", contact_email: "البريد الإلكتروني", contact_subject: "الموضوع", contact_message: "الرسالة",
+  contact_send: "إرسال الرسالة", contact_success: "شكراً لك! تم إرسال رسالتك بنجاح.",
+  contact_error_required: "هذا الحقل مطلوب.", contact_error_email: "يرجى إدخال بريد إلكتروني صحيح.",
+  about_title: "من نحن", contact_info_title: "معلومات الاتصال",
+  privacy_title: "سياسة الخصوصية", terms_title: "الشروط والأحكام", disclaimer_title: "إخلاء المسؤولية",
+  footer_quick_links: "روابط سريعة", footer_useful_links: "روابط مفيدة", footer_latest_articles: "أحدث المقالات",
+  footer_newsletter: "النشرة البريدية", footer_newsletter_placeholder: "بريدك الإلكتروني", footer_subscribe: "اشترك",
+  footer_rights: "جميع الحقوق محفوظة.", footer_tagline: "إرشادات غذائية علمية للجميع، في كل مكان.",
+  breadcrumb_home: "الرئيسية",
+},
+};
+
+// Shared UI-level translations for the remaining languages (fr, es, tl, ru, uk, it, de).
+// These cover navigation, calculator, wheel, and footer strings in full.
+// Longer body content (legal pages, full article text) falls back to English
+// via the getText() helper in script.js until translated separately.
+const PARTIAL_TRANSLATIONS = {
+fr: {
+  site_subtitle: "Mangez Malin • Vivez Mieux",
+  nav_home: "Accueil", nav_calculator: "Calculateur Santé", nav_database: "Base des Calories",
+  nav_wheel: "Roue Nutrition", nav_articles: "Articles", nav_books: "Livres Numériques",
+  nav_about: "À Propos", nav_contact: "Contact", nav_privacy: "Confidentialité",
+  nav_terms: "Conditions", nav_disclaimer: "Avertissement",
+  hero_title: "Comprenez votre corps. Mangez en confiance.",
+  hero_subtitle: "Des outils gratuits et scientifiques pour calculer vos calories, découvrir des aliments sains et créer des habitudes durables.",
+  hero_cta: "Commencer Mon Calcul Gratuit",
+  calc_title: "Calculateur d'Analyse Corporelle", calc_gender: "Sexe", calc_male: "Homme", calc_female: "Femme",
+  calc_age: "Âge (ans)", calc_height: "Taille (cm)", calc_weight: "Poids (kg)", calc_activity: "Niveau d'Activité",
+  act_sedentary: "Sédentaire", act_light: "Léger (1–3 j/sem)", act_moderate: "Modéré (3–5 j/sem)",
+  act_active: "Actif (6–7 j/sem)", act_athlete: "Athlète (entraînement intensif)",
+  calc_goal: "Objectif", goal_lose: "Perdre du Poids", goal_maintain: "Maintenir le Poids", goal_gain: "Prendre du Poids",
+  calc_submit: "Calculer Mes Résultats", calc_reset: "Réinitialiser",
+  wheel_title: "Roue du Savoir Nutritionnel", wheel_spin: "TOURNER LA ROUE",
+  contact_send: "Envoyer", footer_rights: "Tous droits réservés.",
+},
+es: {
+  site_subtitle: "Come Inteligente • Vive Mejor",
+  nav_home: "Inicio", nav_calculator: "Calculadora de Salud", nav_database: "Base de Calorías",
+  nav_wheel: "Rueda de Nutrición", nav_articles: "Artículos", nav_books: "Libros Digitales",
+  nav_about: "Sobre Nosotros", nav_contact: "Contacto", nav_privacy: "Privacidad",
+  nav_terms: "Términos", nav_disclaimer: "Aviso Legal",
+  hero_title: "Comprende tu cuerpo. Come con confianza.",
+  hero_subtitle: "Herramientas gratuitas y científicas para calcular tus calorías, descubrir alimentos saludables y crear hábitos duraderos.",
+  hero_cta: "Comenzar Mi Cálculo Gratis",
+  calc_title: "Calculadora de Análisis Corporal", calc_gender: "Género", calc_male: "Hombre", calc_female: "Mujer",
+  calc_age: "Edad (años)", calc_height: "Altura (cm)", calc_weight: "Peso (kg)", calc_activity: "Nivel de Actividad",
+  act_sedentary: "Sedentario", act_light: "Ligero (1–3 días/sem)", act_moderate: "Moderado (3–5 días/sem)",
+  act_active: "Activo (6–7 días/sem)", act_athlete: "Atleta (entrenamiento intenso)",
+  calc_goal: "Objetivo", goal_lose: "Perder Peso", goal_maintain: "Mantener Peso", goal_gain: "Ganar Peso",
+  calc_submit: "Calcular Mis Resultados", calc_reset: "Reiniciar",
+  wheel_title: "Rueda del Conocimiento Nutricional", wheel_spin: "GIRAR LA RUEDA",
+  contact_send: "Enviar Mensaje", footer_rights: "Todos los derechos reservados.",
+},
+tl: {
+  site_subtitle: "Kumain Nang Matalino • Mamuhay Nang Mas Mabuti",
+  nav_home: "Tahanan", nav_calculator: "Kalkuleytor ng Kalusugan", nav_database: "Database ng Calories",
+  nav_wheel: "Gulong ng Nutrisyon", nav_articles: "Mga Artikulo", nav_books: "Digital na mga Aklat",
+  nav_about: "Tungkol Sa Amin", nav_contact: "Makipag-ugnayan", nav_privacy: "Patakaran sa Privacy",
+  nav_terms: "Mga Tuntunin", nav_disclaimer: "Paunawa",
+  hero_title: "Unawain ang iyong katawan. Kumain nang may kumpiyansa.",
+  hero_subtitle: "Libre at siyentipikong mga tool para kalkulahin ang calories, tuklasin ang masustansyang pagkain, at bumuo ng magandang gawi.",
+  hero_cta: "Simulan ang Libreng Kalkulasyon",
+  calc_title: "Kalkuleytor ng Katawan", calc_gender: "Kasarian", calc_male: "Lalaki", calc_female: "Babae",
+  calc_age: "Edad (taon)", calc_height: "Taas (cm)", calc_weight: "Timbang (kg)", calc_activity: "Antas ng Aktibidad",
+  act_sedentary: "Hindi Aktibo", act_light: "Magaan (1–3 araw/linggo)", act_moderate: "Katamtaman (3–5 araw/linggo)",
+  act_active: "Aktibo (6–7 araw/linggo)", act_athlete: "Atleta (matinding pagsasanay)",
+  calc_goal: "Layunin", goal_lose: "Bumaba ang Timbang", goal_maintain: "Panatilihin ang Timbang", goal_gain: "Tumaas ang Timbang",
+  calc_submit: "Kalkulahin ang Resulta", calc_reset: "I-reset",
+  wheel_title: "Gulong ng Kaalaman sa Nutrisyon", wheel_spin: "IKUTIN ANG GULONG",
+  contact_send: "Ipadala ang Mensahe", footer_rights: "Nakalaan ang lahat ng karapatan.",
+},
+ru: {
+  site_subtitle: "Ешьте с умом • Живите лучше",
+  nav_home: "Главная", nav_calculator: "Калькулятор Здоровья", nav_database: "База Калорий",
+  nav_wheel: "Колесо Питания", nav_articles: "Статьи", nav_books: "Цифровые Книги",
+  nav_about: "О Нас", nav_contact: "Контакты", nav_privacy: "Конфиденциальность",
+  nav_terms: "Условия", nav_disclaimer: "Отказ от Ответственности",
+  hero_title: "Поймите своё тело. Питайтесь уверенно.",
+  hero_subtitle: "Бесплатные научные инструменты для расчёта калорий, изучения полезных продуктов и формирования полезных привычек.",
+  hero_cta: "Начать Бесплатный Расчёт",
+  calc_title: "Калькулятор Анализа Тела", calc_gender: "Пол", calc_male: "Мужской", calc_female: "Женский",
+  calc_age: "Возраст (лет)", calc_height: "Рост (см)", calc_weight: "Вес (кг)", calc_activity: "Уровень Активности",
+  act_sedentary: "Малоподвижный", act_light: "Лёгкий (1–3 дня/нед)", act_moderate: "Умеренный (3–5 дней/нед)",
+  act_active: "Активный (6–7 дней/нед)", act_athlete: "Спортсмен (интенсивные тренировки)",
+  calc_goal: "Цель", goal_lose: "Похудеть", goal_maintain: "Сохранить Вес", goal_gain: "Набрать Вес",
+  calc_submit: "Рассчитать Результаты", calc_reset: "Сбросить",
+  wheel_title: "Колесо Знаний о Питании", wheel_spin: "КРУТИТЬ КОЛЕСО",
+  contact_send: "Отправить Сообщение", footer_rights: "Все права защищены.",
+},
+uk: {
+  site_subtitle: "Їжте розумно • Живіть краще",
+  nav_home: "Головна", nav_calculator: "Калькулятор Здоров'я", nav_database: "База Калорій",
+  nav_wheel: "Колесо Харчування", nav_articles: "Статті", nav_books: "Цифрові Книги",
+  nav_about: "Про Нас", nav_contact: "Контакти", nav_privacy: "Конфіденційність",
+  nav_terms: "Умови", nav_disclaimer: "Відмова від Відповідальності",
+  hero_title: "Зрозумійте своє тіло. Харчуйтесь впевнено.",
+  hero_subtitle: "Безкоштовні наукові інструменти для розрахунку калорій, вибору корисних продуктів і формування корисних звичок.",
+  hero_cta: "Почати Безкоштовний Розрахунок",
+  calc_title: "Калькулятор Аналізу Тіла", calc_gender: "Стать", calc_male: "Чоловіча", calc_female: "Жіноча",
+  calc_age: "Вік (років)", calc_height: "Зріст (см)", calc_weight: "Вага (кг)", calc_activity: "Рівень Активності",
+  act_sedentary: "Малорухливий", act_light: "Легкий (1–3 дні/тиж)", act_moderate: "Помірний (3–5 днів/тиж)",
+  act_active: "Активний (6–7 днів/тиж)", act_athlete: "Спортсмен (інтенсивні тренування)",
+  calc_goal: "Ціль", goal_lose: "Схуднути", goal_maintain: "Утримати Вагу", goal_gain: "Набрати Вагу",
+  calc_submit: "Розрахувати Результати", calc_reset: "Скинути",
+  wheel_title: "Колесо Знань про Харчування", wheel_spin: "КРУТИТИ КОЛЕСО",
+  contact_send: "Надіслати Повідомлення", footer_rights: "Усі права захищено.",
+},
+it: {
+  site_subtitle: "Mangia Bene • Vivi Meglio",
+  nav_home: "Home", nav_calculator: "Calcolatore Salute", nav_database: "Database Calorie",
+  nav_wheel: "Ruota Nutrizione", nav_articles: "Articoli", nav_books: "Libri Digitali",
+  nav_about: "Chi Siamo", nav_contact: "Contatti", nav_privacy: "Privacy",
+  nav_terms: "Termini", nav_disclaimer: "Disclaimer",
+  hero_title: "Capisci il tuo corpo. Mangia con fiducia.",
+  hero_subtitle: "Strumenti scientifici gratuiti per calcolare le calorie, scoprire alimenti sani e costruire abitudini durature.",
+  hero_cta: "Inizia il Calcolo Gratuito",
+  calc_title: "Calcolatore di Analisi Corporea", calc_gender: "Genere", calc_male: "Uomo", calc_female: "Donna",
+  calc_age: "Età (anni)", calc_height: "Altezza (cm)", calc_weight: "Peso (kg)", calc_activity: "Livello di Attività",
+  act_sedentary: "Sedentario", act_light: "Leggero (1–3 gg/sett)", act_moderate: "Moderato (3–5 gg/sett)",
+  act_active: "Attivo (6–7 gg/sett)", act_athlete: "Atleta (allenamento intenso)",
+  calc_goal: "Obiettivo", goal_lose: "Perdere Peso", goal_maintain: "Mantenere il Peso", goal_gain: "Aumentare Peso",
+  calc_submit: "Calcola i Miei Risultati", calc_reset: "Reimposta",
+  wheel_title: "Ruota della Conoscenza Nutrizionale", wheel_spin: "GIRA LA RUOTA",
+  contact_send: "Invia Messaggio", footer_rights: "Tutti i diritti riservati.",
+},
+de: {
+  site_subtitle: "Klug Essen • Besser Leben",
+  nav_home: "Startseite", nav_calculator: "Gesundheitsrechner", nav_database: "Kalorien-Datenbank",
+  nav_wheel: "Ernährungsrad", nav_articles: "Artikel", nav_books: "Digitale Bücher",
+  nav_about: "Über Uns", nav_contact: "Kontakt", nav_privacy: "Datenschutz",
+  nav_terms: "AGB", nav_disclaimer: "Haftungsausschluss",
+  hero_title: "Verstehe deinen Körper. Iss mit Zuversicht.",
+  hero_subtitle: "Kostenlose, wissenschaftlich fundierte Tools zur Berechnung deiner Kalorien, Entdeckung gesunder Lebensmittel und Aufbau gesunder Gewohnheiten.",
+  hero_cta: "Kostenlose Berechnung Starten",
+  calc_title: "Körperanalyse-Rechner", calc_gender: "Geschlecht", calc_male: "Männlich", calc_female: "Weiblich",
+  calc_age: "Alter (Jahre)", calc_height: "Größe (cm)", calc_weight: "Gewicht (kg)", calc_activity: "Aktivitätslevel",
+  act_sedentary: "Sitzend", act_light: "Leicht (1–3 Tage/Woche)", act_moderate: "Moderat (3–5 Tage/Woche)",
+  act_active: "Aktiv (6–7 Tage/Woche)", act_athlete: "Athlet (sehr intensives Training)",
+  calc_goal: "Ziel", goal_lose: "Gewicht Verlieren", goal_maintain: "Gewicht Halten", goal_gain: "Gewicht Zunehmen",
+  calc_submit: "Ergebnisse Berechnen", calc_reset: "Zurücksetzen",
+  wheel_title: "Ernährungswissens-Rad", wheel_spin: "RAD DREHEN",
+  contact_send: "Nachricht Senden", footer_rights: "Alle Rechte vorbehalten.",
+},
+};
+
+// Merge partials onto English base so every key always resolves to *something*.
+Object.keys(PARTIAL_TRANSLATIONS).forEach((lang) => {
+  TRANSLATIONS[lang] = Object.assign({}, TRANSLATIONS.en, PARTIAL_TRANSLATIONS[lang]);
+});
+
+if (typeof module !== "undefined") module.exports = { LANGUAGES, TRANSLATIONS };
+
+/* ==========================================================================
+   MyBodyGuide — Food Composition Database
+   ~100 common halal foods with per-serving macro data.
+   Values are representative estimates rounded from standard food
+   composition tables (e.g. USDA FoodData Central) and are provided
+   for general educational use, not clinical/dietary prescription.
+   No alcohol or pork-derived items are included.
+   Fields: id, name, category, serving, kcal, protein(g), carbs(g),
+           fat(g), fiber(g), sugar(g), sodium(mg)
+   ========================================================================== */
+
+const FOOD_DATABASE = [
+  // Vegetables
+  { id: "veg1", name: "Broccoli", category: "vegetables", serving: "100 g", kcal: 34, protein: 2.8, carbs: 7, fat: 0.4, fiber: 2.6, sugar: 1.7, sodium: 33 },
+  { id: "veg2", name: "Spinach", category: "vegetables", serving: "100 g", kcal: 23, protein: 2.9, carbs: 3.6, fat: 0.4, fiber: 2.2, sugar: 0.4, sodium: 79 },
+  { id: "veg3", name: "Carrot", category: "vegetables", serving: "100 g", kcal: 41, protein: 0.9, carbs: 10, fat: 0.2, fiber: 2.8, sugar: 4.7, sodium: 69 },
+  { id: "veg4", name: "Tomato", category: "vegetables", serving: "100 g", kcal: 18, protein: 0.9, carbs: 3.9, fat: 0.2, fiber: 1.2, sugar: 2.6, sodium: 5 },
+  { id: "veg5", name: "Cucumber", category: "vegetables", serving: "100 g", kcal: 15, protein: 0.7, carbs: 3.6, fat: 0.1, fiber: 0.5, sugar: 1.7, sodium: 2 },
+  { id: "veg6", name: "Bell Pepper", category: "vegetables", serving: "100 g", kcal: 31, protein: 1.0, carbs: 6, fat: 0.3, fiber: 2.1, sugar: 4.2, sodium: 4 },
+  { id: "veg7", name: "Zucchini", category: "vegetables", serving: "100 g", kcal: 17, protein: 1.2, carbs: 3.1, fat: 0.3, fiber: 1.0, sugar: 2.5, sodium: 8 },
+  { id: "veg8", name: "Cauliflower", category: "vegetables", serving: "100 g", kcal: 25, protein: 1.9, carbs: 5, fat: 0.3, fiber: 2.0, sugar: 1.9, sodium: 30 },
+  { id: "veg9", name: "Onion", category: "vegetables", serving: "100 g", kcal: 40, protein: 1.1, carbs: 9.3, fat: 0.1, fiber: 1.7, sugar: 4.2, sodium: 4 },
+  { id: "veg10", name: "Potato (boiled)", category: "vegetables", serving: "100 g", kcal: 87, protein: 1.9, carbs: 20, fat: 0.1, fiber: 1.8, sugar: 0.8, sodium: 6 },
+  { id: "veg11", name: "Sweet Potato", category: "vegetables", serving: "100 g", kcal: 86, protein: 1.6, carbs: 20, fat: 0.1, fiber: 3.0, sugar: 4.2, sodium: 55 },
+  { id: "veg12", name: "Eggplant", category: "vegetables", serving: "100 g", kcal: 25, protein: 1.0, carbs: 6, fat: 0.2, fiber: 3.0, sugar: 3.5, sodium: 2 },
+
+  // Fruits
+  { id: "fr1", name: "Apple", category: "fruits", serving: "1 medium (180 g)", kcal: 95, protein: 0.5, carbs: 25, fat: 0.3, fiber: 4.4, sugar: 19, sodium: 2 },
+  { id: "fr2", name: "Banana", category: "fruits", serving: "1 medium (120 g)", kcal: 105, protein: 1.3, carbs: 27, fat: 0.4, fiber: 3.1, sugar: 14, sodium: 1 },
+  { id: "fr3", name: "Orange", category: "fruits", serving: "1 medium (130 g)", kcal: 62, protein: 1.2, carbs: 15, fat: 0.2, fiber: 3.1, sugar: 12, sodium: 0 },
+  { id: "fr4", name: "Strawberries", category: "fruits", serving: "100 g", kcal: 32, protein: 0.7, carbs: 7.7, fat: 0.3, fiber: 2.0, sugar: 4.9, sodium: 1 },
+  { id: "fr5", name: "Watermelon", category: "fruits", serving: "100 g", kcal: 30, protein: 0.6, carbs: 8, fat: 0.2, fiber: 0.4, sugar: 6.2, sodium: 1 },
+  { id: "fr6", name: "Grapes", category: "fruits", serving: "100 g", kcal: 69, protein: 0.7, carbs: 18, fat: 0.2, fiber: 0.9, sugar: 16, sodium: 2 },
+  { id: "fr7", name: "Mango", category: "fruits", serving: "100 g", kcal: 60, protein: 0.8, carbs: 15, fat: 0.4, fiber: 1.6, sugar: 14, sodium: 1 },
+  { id: "fr8", name: "Pear", category: "fruits", serving: "1 medium (178 g)", kcal: 101, protein: 0.6, carbs: 27, fat: 0.2, fiber: 5.5, sugar: 17, sodium: 2 },
+  { id: "fr9", name: "Pineapple", category: "fruits", serving: "100 g", kcal: 50, protein: 0.5, carbs: 13, fat: 0.1, fiber: 1.4, sugar: 10, sodium: 1 },
+  { id: "fr10", name: "Pomegranate", category: "fruits", serving: "100 g", kcal: 83, protein: 1.7, carbs: 19, fat: 1.2, fiber: 4.0, sugar: 14, sodium: 3 },
+  { id: "fr11", name: "Fig (fresh)", category: "fruits", serving: "100 g", kcal: 74, protein: 0.8, carbs: 19, fat: 0.3, fiber: 2.9, sugar: 16, sodium: 1 },
+  { id: "fr12", name: "Avocado", category: "fruits", serving: "100 g", kcal: 160, protein: 2.0, carbs: 9, fat: 15, fiber: 6.7, sugar: 0.7, sodium: 7 },
+
+  // Natural Juices
+  { id: "ju1", name: "Orange Juice (fresh)", category: "juices", serving: "1 cup (240 ml)", kcal: 112, protein: 1.7, carbs: 26, fat: 0.5, fiber: 0.5, sugar: 21, sodium: 2 },
+  { id: "ju2", name: "Apple Juice (fresh)", category: "juices", serving: "1 cup (240 ml)", kcal: 114, protein: 0.2, carbs: 28, fat: 0.3, fiber: 0.2, sugar: 24, sodium: 10 },
+  { id: "ju3", name: "Pomegranate Juice", category: "juices", serving: "1 cup (240 ml)", kcal: 134, protein: 0.5, carbs: 32, fat: 0.3, fiber: 0.2, sugar: 30, sodium: 10 },
+  { id: "ju4", name: "Carrot Juice", category: "juices", serving: "1 cup (240 ml)", kcal: 94, protein: 2.2, carbs: 22, fat: 0.4, fiber: 1.9, sugar: 9, sodium: 148 },
+  { id: "ju5", name: "Watermelon Juice", category: "juices", serving: "1 cup (240 ml)", kcal: 85, protein: 1.7, carbs: 21, fat: 0.4, fiber: 0.5, sugar: 18, sodium: 5 },
+
+  // Legumes
+  { id: "leg1", name: "Lentils (cooked)", category: "legumes", serving: "1 cup (198 g)", kcal: 230, protein: 18, carbs: 40, fat: 0.8, fiber: 16, sugar: 3.6, sodium: 4 },
+  { id: "leg2", name: "Chickpeas (cooked)", category: "legumes", serving: "1 cup (164 g)", kcal: 269, protein: 15, carbs: 45, fat: 4.3, fiber: 12.5, sugar: 8, sodium: 11 },
+  { id: "leg3", name: "Kidney Beans (cooked)", category: "legumes", serving: "1 cup (177 g)", kcal: 225, protein: 15, carbs: 40, fat: 0.9, fiber: 13, sugar: 0.6, sodium: 2 },
+  { id: "leg4", name: "Black Beans (cooked)", category: "legumes", serving: "1 cup (172 g)", kcal: 227, protein: 15, carbs: 41, fat: 0.9, fiber: 15, sugar: 0.3, sodium: 2 },
+  { id: "leg5", name: "Green Peas (cooked)", category: "legumes", serving: "1 cup (160 g)", kcal: 134, protein: 8.6, carbs: 25, fat: 0.4, fiber: 8.8, sugar: 9.3, sodium: 5 },
+  { id: "leg6", name: "Fava Beans (cooked)", category: "legumes", serving: "1 cup (170 g)", kcal: 187, protein: 13, carbs: 33, fat: 0.6, fiber: 9.2, sugar: 3.5, sodium: 9 },
+
+  // Grains / Rice / Bread / Pasta
+  { id: "gr1", name: "White Rice (cooked)", category: "grains", serving: "1 cup (158 g)", kcal: 205, protein: 4.3, carbs: 45, fat: 0.4, fiber: 0.6, sugar: 0.1, sodium: 2 },
+  { id: "gr2", name: "Brown Rice (cooked)", category: "grains", serving: "1 cup (195 g)", kcal: 216, protein: 5, carbs: 45, fat: 1.8, fiber: 3.5, sugar: 0.7, sodium: 10 },
+  { id: "gr3", name: "Quinoa (cooked)", category: "grains", serving: "1 cup (185 g)", kcal: 222, protein: 8, carbs: 39, fat: 3.6, fiber: 5.2, sugar: 1.6, sodium: 13 },
+  { id: "gr4", name: "Oats (rolled, dry)", category: "grains", serving: "1/2 cup (40 g)", kcal: 150, protein: 5.3, carbs: 27, fat: 2.6, fiber: 4.0, sugar: 1.1, sodium: 0 },
+  { id: "gr5", name: "Whole Wheat Bread", category: "bread", serving: "1 slice (32 g)", kcal: 81, protein: 4, carbs: 14, fat: 1.1, fiber: 2, sugar: 1.6, sodium: 144 },
+  { id: "gr6", name: "White Bread", category: "bread", serving: "1 slice (28 g)", kcal: 75, protein: 2.6, carbs: 14, fat: 1.0, fiber: 0.8, sugar: 1.5, sodium: 152 },
+  { id: "gr7", name: "Pita Bread (whole wheat)", category: "bread", serving: "1 piece (64 g)", kcal: 170, protein: 6, carbs: 35, fat: 1.7, fiber: 4.7, sugar: 1.0, sodium: 340 },
+  { id: "gr8", name: "Whole Wheat Pasta (cooked)", category: "pasta", serving: "1 cup (140 g)", kcal: 174, protein: 7.5, carbs: 37, fat: 0.8, fiber: 6.3, sugar: 0.8, sodium: 4 },
+  { id: "gr9", name: "White Pasta (cooked)", category: "pasta", serving: "1 cup (140 g)", kcal: 220, protein: 8, carbs: 43, fat: 1.3, fiber: 2.5, sugar: 0.8, sodium: 1 },
+  { id: "gr10", name: "Couscous (cooked)", category: "grains", serving: "1 cup (157 g)", kcal: 176, protein: 6, carbs: 36, fat: 0.3, fiber: 2.2, sugar: 0.1, sodium: 8 },
+  { id: "gr11", name: "Bulgur (cooked)", category: "grains", serving: "1 cup (182 g)", kcal: 151, protein: 5.6, carbs: 34, fat: 0.4, fiber: 8.2, sugar: 0.1, sodium: 9 },
+
+  // Healthy Snacks / Nuts / Seeds
+  { id: "sn1", name: "Almonds", category: "nuts", serving: "28 g (~23 nuts)", kcal: 164, protein: 6, carbs: 6, fat: 14, fiber: 3.5, sugar: 1.2, sodium: 0 },
+  { id: "sn2", name: "Walnuts", category: "nuts", serving: "28 g (~14 halves)", kcal: 185, protein: 4.3, carbs: 3.9, fat: 18.5, fiber: 1.9, sugar: 0.7, sodium: 1 },
+  { id: "sn3", name: "Cashews", category: "nuts", serving: "28 g (~18 nuts)", kcal: 157, protein: 5.2, carbs: 8.6, fat: 12.4, fiber: 0.9, sugar: 1.7, sodium: 3 },
+  { id: "sn4", name: "Pistachios", category: "nuts", serving: "28 g (~49 nuts)", kcal: 159, protein: 5.7, carbs: 8, fat: 12.8, fiber: 3, sugar: 2.2, sodium: 0 },
+  { id: "sn5", name: "Chia Seeds", category: "seeds", serving: "28 g (2 tbsp)", kcal: 138, protein: 4.7, carbs: 12, fat: 8.7, fiber: 9.8, sugar: 0, sodium: 5 },
+  { id: "sn6", name: "Flax Seeds", category: "seeds", serving: "28 g (2 tbsp)", kcal: 150, protein: 5.1, carbs: 8.1, fat: 11.8, fiber: 7.6, sugar: 0.4, sodium: 8 },
+  { id: "sn7", name: "Pumpkin Seeds", category: "seeds", serving: "28 g (2 tbsp)", kcal: 151, protein: 7, carbs: 5, fat: 13, fiber: 1.7, sugar: 0.4, sodium: 5 },
+  { id: "sn8", name: "Sunflower Seeds", category: "seeds", serving: "28 g (2 tbsp)", kcal: 165, protein: 5.8, carbs: 5.5, fat: 14.4, fiber: 2.4, sugar: 0.6, sodium: 1 },
+  { id: "sn9", name: "Popcorn (air-popped)", category: "snacks", serving: "1 cup (8 g)", kcal: 31, protein: 1, carbs: 6.2, fat: 0.4, fiber: 1.2, sugar: 0.1, sodium: 0 },
+  { id: "sn10", name: "Rice Cakes", category: "snacks", serving: "1 cake (9 g)", kcal: 35, protein: 0.7, carbs: 7.3, fat: 0.3, fiber: 0.4, sugar: 0, sodium: 15 },
+
+  // Dairy: Milk / Cheese / Yogurt / Eggs
+  { id: "da1", name: "Milk (low-fat 1%)", category: "dairy", serving: "1 cup (240 ml)", kcal: 102, protein: 8.2, carbs: 12.2, fat: 2.4, fiber: 0, sugar: 12.2, sodium: 107 },
+  { id: "da2", name: "Milk (whole)", category: "dairy", serving: "1 cup (240 ml)", kcal: 149, protein: 7.7, carbs: 12, fat: 8, fiber: 0, sugar: 12, sodium: 105 },
+  { id: "da3", name: "Greek Yogurt (plain, low-fat)", category: "dairy", serving: "170 g", kcal: 100, protein: 17, carbs: 6, fat: 0.7, fiber: 0, sugar: 6, sodium: 61 },
+  { id: "da4", name: "Natural Yogurt (whole milk)", category: "dairy", serving: "170 g", kcal: 149, protein: 8.5, carbs: 11, fat: 8, fiber: 0, sugar: 11, sodium: 113 },
+  { id: "da5", name: "White Cheese (Feta-style)", category: "dairy", serving: "28 g", kcal: 75, protein: 4, carbs: 1.2, fat: 6, fiber: 0, sugar: 1.2, sodium: 316 },
+  { id: "da6", name: "Halloumi Cheese", category: "dairy", serving: "28 g", kcal: 100, protein: 6.8, carbs: 1, fat: 8, fiber: 0, sugar: 0.5, sodium: 350 },
+  { id: "da7", name: "Cottage Cheese (low-fat)", category: "dairy", serving: "1/2 cup (113 g)", kcal: 90, protein: 12, carbs: 5, fat: 2, fiber: 0, sugar: 4, sodium: 348 },
+  { id: "da8", name: "Labneh", category: "dairy", serving: "28 g", kcal: 50, protein: 2.5, carbs: 2, fat: 3.5, fiber: 0, sugar: 2, sodium: 40 },
+  { id: "eg1", name: "Egg (boiled)", category: "eggs", serving: "1 large (50 g)", kcal: 78, protein: 6.3, carbs: 0.6, fat: 5.3, fiber: 0, sugar: 0.6, sodium: 62 },
+  { id: "eg2", name: "Egg Whites", category: "eggs", serving: "1 large (33 g)", kcal: 17, protein: 3.6, carbs: 0.2, fat: 0.1, fiber: 0, sugar: 0.2, sodium: 55 },
+
+  // Poultry & Meat (halal)
+  { id: "me1", name: "Chicken Breast (grilled, skinless)", category: "chicken", serving: "100 g", kcal: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0, sugar: 0, sodium: 74 },
+  { id: "me2", name: "Chicken Thigh (grilled, skinless)", category: "chicken", serving: "100 g", kcal: 209, protein: 26, carbs: 0, fat: 10.9, fiber: 0, sugar: 0, sodium: 90 },
+  { id: "me3", name: "Turkey Breast (roasted)", category: "turkey", serving: "100 g", kcal: 135, protein: 30, carbs: 0, fat: 1, fiber: 0, sugar: 0, sodium: 55 },
+  { id: "me4", name: "Beef (lean, grilled)", category: "beef", serving: "100 g", kcal: 217, protein: 26, carbs: 0, fat: 12, fiber: 0, sugar: 0, sodium: 60 },
+  { id: "me5", name: "Beef Mince (90% lean, cooked)", category: "beef", serving: "100 g", kcal: 217, protein: 26, carbs: 0, fat: 12, fiber: 0, sugar: 0, sodium: 75 },
+  { id: "me6", name: "Lamb Chops (grilled, lean)", category: "lamb", serving: "100 g", kcal: 235, protein: 25, carbs: 0, fat: 14, fiber: 0, sugar: 0, sodium: 72 },
+  { id: "me7", name: "Camel Meat (lean, cooked)", category: "camel", serving: "100 g", kcal: 160, protein: 30, carbs: 0, fat: 3.5, fiber: 0, sugar: 0, sodium: 65 },
+
+  // Fish & Seafood
+  { id: "fi1", name: "Salmon (grilled)", category: "fish", serving: "100 g", kcal: 208, protein: 22, carbs: 0, fat: 13, fiber: 0, sugar: 0, sodium: 59 },
+  { id: "fi2", name: "Tuna (canned in water)", category: "fish", serving: "100 g", kcal: 116, protein: 26, carbs: 0, fat: 0.8, fiber: 0, sugar: 0, sodium: 247 },
+  { id: "fi3", name: "Cod (baked)", category: "fish", serving: "100 g", kcal: 105, protein: 23, carbs: 0, fat: 0.9, fiber: 0, sugar: 0, sodium: 78 },
+  { id: "fi4", name: "Sardines (canned in water)", category: "fish", serving: "100 g", kcal: 208, protein: 25, carbs: 0, fat: 11, fiber: 0, sugar: 0, sodium: 307 },
+  { id: "se1", name: "Shrimp (grilled)", category: "seafood", serving: "100 g", kcal: 99, protein: 24, carbs: 0.2, fat: 0.3, fiber: 0, sugar: 0, sodium: 111 },
+  { id: "se2", name: "Calamari (grilled)", category: "seafood", serving: "100 g", kcal: 92, protein: 15.6, carbs: 3.1, fat: 1.4, fiber: 0, sugar: 0, sodium: 44 },
+
+  // Soups
+  { id: "so1", name: "Lentil Soup", category: "soups", serving: "1 cup (240 ml)", kcal: 140, protein: 9, carbs: 22, fat: 2, fiber: 8, sugar: 2, sodium: 480 },
+  { id: "so2", name: "Vegetable Soup", category: "soups", serving: "1 cup (240 ml)", kcal: 90, protein: 3, carbs: 15, fat: 2, fiber: 3, sugar: 4, sodium: 460 },
+  { id: "so3", name: "Chicken Soup", category: "soups", serving: "1 cup (240 ml)", kcal: 120, protein: 10, carbs: 9, fat: 4.5, fiber: 1, sugar: 1, sodium: 520 },
+
+  // Healthy Drinks / Coffee / Tea
+  { id: "dr1", name: "Green Tea (unsweetened)", category: "drinks", serving: "1 cup (240 ml)", kcal: 2, protein: 0.5, carbs: 0, fat: 0, fiber: 0, sugar: 0, sodium: 2 },
+  { id: "dr2", name: "Black Coffee (unsweetened)", category: "coffee", serving: "1 cup (240 ml)", kcal: 2, protein: 0.3, carbs: 0, fat: 0, fiber: 0, sugar: 0, sodium: 5 },
+  { id: "dr3", name: "Black Tea (unsweetened)", category: "tea", serving: "1 cup (240 ml)", kcal: 2, protein: 0, carbs: 0.7, fat: 0, fiber: 0, sugar: 0, sodium: 7 },
+  { id: "dr4", name: "Mint Tea (unsweetened)", category: "tea", serving: "1 cup (240 ml)", kcal: 1, protein: 0, carbs: 0.2, fat: 0, fiber: 0, sugar: 0, sodium: 1 },
+  { id: "dr5", name: "Cappuccino (low-fat milk)", category: "coffee", serving: "1 cup (240 ml)", kcal: 80, protein: 6, carbs: 8, fat: 3, fiber: 0, sugar: 8, sodium: 90 },
+  { id: "dr6", name: "Coconut Water", category: "drinks", serving: "1 cup (240 ml)", kcal: 46, protein: 1.7, carbs: 9, fat: 0.5, fiber: 2.6, sugar: 6.3, sodium: 252 },
+
+  // Dates / Honey
+  { id: "dt1", name: "Dates (Medjool)", category: "dates", serving: "2 dates (48 g)", kcal: 133, protein: 0.9, carbs: 36, fat: 0.1, fiber: 3.2, sugar: 32, sodium: 1 },
+  { id: "dt2", name: "Dates (Ajwa)", category: "dates", serving: "2 dates (40 g)", kcal: 110, protein: 0.8, carbs: 29, fat: 0.1, fiber: 2.8, sugar: 26, sodium: 1 },
+  { id: "hn1", name: "Honey (natural)", category: "honey", serving: "1 tbsp (21 g)", kcal: 64, protein: 0.1, carbs: 17, fat: 0, fiber: 0, sugar: 17, sodium: 1 },
+
+  // Olive Oil / Herbs / Spices
+  { id: "oo1", name: "Olive Oil (extra virgin)", category: "oils", serving: "1 tbsp (14 g)", kcal: 119, protein: 0, carbs: 0, fat: 13.5, fiber: 0, sugar: 0, sodium: 0 },
+  { id: "hb1", name: "Fresh Mint", category: "herbs", serving: "10 g", kcal: 4, protein: 0.4, carbs: 0.7, fat: 0.1, fiber: 0.5, sugar: 0.1, sodium: 3 },
+  { id: "hb2", name: "Fresh Parsley", category: "herbs", serving: "10 g", kcal: 3, protein: 0.3, carbs: 0.6, fat: 0.1, fiber: 0.3, sugar: 0.1, sodium: 6 },
+  { id: "hb3", name: "Fresh Coriander", category: "herbs", serving: "10 g", kcal: 2, protein: 0.2, carbs: 0.4, fat: 0.1, fiber: 0.3, sugar: 0.1, sodium: 5 },
+  { id: "sp1", name: "Cumin (ground)", category: "spices", serving: "1 tsp (2 g)", kcal: 8, protein: 0.4, carbs: 0.9, fat: 0.5, fiber: 0.2, sugar: 0.1, sodium: 4 },
+  { id: "sp2", name: "Turmeric (ground)", category: "spices", serving: "1 tsp (3 g)", kcal: 9, protein: 0.2, carbs: 2, fat: 0.1, fiber: 0.7, sugar: 0.1, sodium: 1 },
+  { id: "sp3", name: "Cinnamon (ground)", category: "spices", serving: "1 tsp (2.6 g)", kcal: 6, protein: 0.1, carbs: 2.1, fat: 0, fiber: 1.4, sugar: 0.1, sodium: 0 },
+  { id: "sp4", name: "Black Pepper (ground)", category: "spices", serving: "1 tsp (2.3 g)", kcal: 6, protein: 0.2, carbs: 1.5, fat: 0.1, fiber: 0.6, sugar: 0, sodium: 0 },
+  { id: "sp5", name: "Ginger (fresh)", category: "spices", serving: "10 g", kcal: 8, protein: 0.2, carbs: 1.8, fat: 0.1, fiber: 0.2, sugar: 0.2, sodium: 1 },
+
+  // More vegetables/fruits/grains to round out ~100 items
+  { id: "veg13", name: "Green Beans", category: "vegetables", serving: "100 g", kcal: 31, protein: 1.8, carbs: 7, fat: 0.2, fiber: 3.4, sugar: 3.3, sodium: 6 },
+  { id: "veg14", name: "Cabbage", category: "vegetables", serving: "100 g", kcal: 25, protein: 1.3, carbs: 6, fat: 0.1, fiber: 2.5, sugar: 3.2, sodium: 18 },
+  { id: "veg15", name: "Beetroot", category: "vegetables", serving: "100 g", kcal: 43, protein: 1.6, carbs: 10, fat: 0.2, fiber: 2.8, sugar: 6.8, sodium: 78 },
+  { id: "veg16", name: "Mushrooms", category: "vegetables", serving: "100 g", kcal: 22, protein: 3.1, carbs: 3.3, fat: 0.3, fiber: 1.0, sugar: 2.0, sodium: 5 },
+  { id: "veg17", name: "Okra", category: "vegetables", serving: "100 g", kcal: 33, protein: 1.9, carbs: 7.5, fat: 0.2, fiber: 3.2, sugar: 1.5, sodium: 7 },
+  { id: "fr13", name: "Kiwi", category: "fruits", serving: "1 medium (76 g)", kcal: 46, protein: 0.9, carbs: 11, fat: 0.4, fiber: 2.3, sugar: 6.7, sodium: 2 },
+  { id: "fr14", name: "Peach", category: "fruits", serving: "1 medium (150 g)", kcal: 59, protein: 1.4, carbs: 14, fat: 0.4, fiber: 2.3, sugar: 13, sodium: 0 },
+  { id: "fr15", name: "Guava", category: "fruits", serving: "100 g", kcal: 68, protein: 2.6, carbs: 14, fat: 1.0, fiber: 5.4, sugar: 8.9, sodium: 2 },
+  { id: "gr12", name: "Barley (cooked)", category: "grains", serving: "1 cup (157 g)", kcal: 193, protein: 3.5, carbs: 44, fat: 0.7, fiber: 6, sugar: 0.4, sodium: 5 },
+  { id: "gr13", name: "Corn (boiled)", category: "grains", serving: "1 cup (154 g)", kcal: 143, protein: 5.4, carbs: 31, fat: 2.2, fiber: 3.6, sugar: 6.8, sodium: 21 },
+];
+
+if (typeof module !== "undefined") module.exports = FOOD_DATABASE;
+
+/* ==========================================================================
+   MyBodyGuide — Nutrition Knowledge Wheel: Fact Bank
+   100 general, evidence-based nutrition & lifestyle facts, phrased
+   conservatively and consistent with mainstream public-health guidance
+   (e.g. WHO / FAO dietary guidance themes). Educational use only —
+   not medical advice. Each fact has a category tag for future filtering.
+   ========================================================================== */
+
+const NUTRITION_FACTS = [
+  { cat: "hydration", text: "Water supports almost every body function, from digestion to temperature control — most adults benefit from spreading fluid intake throughout the day." },
+  { cat: "hydration", text: "Thirst is a lagging signal — by the time you feel thirsty, you may already be mildly dehydrated." },
+  { cat: "hydration", text: "Fruits and vegetables like cucumber, watermelon and oranges contribute meaningfully to daily fluid intake." },
+  { cat: "hydration", text: "Mild dehydration can affect concentration and energy levels well before you feel obviously thirsty." },
+  { cat: "vegetables", text: "WHO recommends at least 400 g (5 portions) of fruits and vegetables a day to support long-term health." },
+  { cat: "vegetables", text: "Eating a variety of colorful vegetables helps you get a broader range of vitamins, minerals and plant compounds." },
+  { cat: "vegetables", text: "Leafy greens like spinach and kale are rich in folate, vitamin K and dietary fiber." },
+  { cat: "vegetables", text: "Cooking method matters — steaming or roasting vegetables generally preserves more nutrients than boiling for long periods." },
+  { cat: "fruits", text: "Whole fruit contains fiber that slows sugar absorption, unlike most fruit juices." },
+  { cat: "fruits", text: "Dates are a traditional energy-dense fruit, valued in many cultures for a quick, natural source of carbohydrates." },
+  { cat: "fruits", text: "Citrus fruits are a well-known source of vitamin C, which supports normal immune function." },
+  { cat: "fruits", text: "Berries are among the fruits with the highest antioxidant content per serving." },
+  { cat: "fiber", text: "Dietary fiber supports healthy digestion and helps you feel fuller for longer after meals." },
+  { cat: "fiber", text: "Most adults fall short of recommended daily fiber intake — legumes, whole grains, fruits and vegetables can help close the gap." },
+  { cat: "fiber", text: "Soluble fiber, found in oats and legumes, can help support healthy cholesterol levels as part of a balanced diet." },
+  { cat: "fiber", text: "Increasing fiber intake gradually, with adequate water, helps minimize digestive discomfort." },
+  { cat: "protein", text: "Protein provides the building blocks (amino acids) your body uses to repair and maintain muscle tissue." },
+  { cat: "protein", text: "Both plant sources (legumes, nuts) and animal sources (chicken, fish, eggs, dairy) can contribute to daily protein needs." },
+  { cat: "protein", text: "Spreading protein intake across meals, rather than concentrating it in one meal, may support muscle maintenance." },
+  { cat: "protein", text: "Active individuals and older adults often benefit from slightly higher protein intake than sedentary younger adults." },
+  { cat: "exercise", text: "WHO recommends at least 150–300 minutes of moderate-intensity physical activity per week for most adults." },
+  { cat: "exercise", text: "Regular physical activity supports cardiovascular health, mood, sleep quality and long-term weight management." },
+  { cat: "exercise", text: "Strength training at least twice a week helps preserve muscle mass, which naturally declines with age." },
+  { cat: "exercise", text: "Short bouts of movement throughout the day can add up to meaningful health benefits, even without a single long workout." },
+  { cat: "sleep", text: "Most adults need about 7–9 hours of sleep per night for optimal health and recovery." },
+  { cat: "sleep", text: "Poor sleep is associated with changes in appetite-regulating hormones, which can influence hunger and food choices." },
+  { cat: "sleep", text: "A consistent sleep schedule can help regulate your body's internal clock and improve sleep quality." },
+  { cat: "sleep", text: "Limiting caffeine in the afternoon and evening can help support better sleep at night." },
+  { cat: "mental_health", text: "Nutrition and mental well-being are connected — a balanced diet is one of several factors that support mood and cognitive function." },
+  { cat: "mental_health", text: "Regular meals help maintain stable blood sugar, which can support steadier energy and mood throughout the day." },
+  { cat: "mental_health", text: "Physical activity is associated with reduced symptoms of stress and anxiety in many studies." },
+  { cat: "mental_health", text: "Social connection during meals can be as nourishing as the food itself for overall well-being." },
+  { cat: "healthy_habits", text: "Small, sustainable changes to daily habits tend to last longer than extreme short-term diets." },
+  { cat: "healthy_habits", text: "Planning meals ahead of time can reduce reliance on last-minute, less nutritious choices." },
+  { cat: "healthy_habits", text: "Reading nutrition labels helps you compare products and make more informed choices." },
+  { cat: "healthy_habits", text: "Mindful eating — slowing down and paying attention to hunger cues — can support healthier portion sizes." },
+  { cat: "heart_health", text: "Limiting saturated fat and replacing it with unsaturated fats (like olive oil) supports cardiovascular health." },
+  { cat: "heart_health", text: "WHO recommends limiting free sugar intake to less than 10% of total daily energy, ideally under 5%, partly for heart health." },
+  { cat: "heart_health", text: "Reducing sodium intake can help support healthy blood pressure levels over time." },
+  { cat: "heart_health", text: "Oily fish like salmon and sardines provide omega-3 fatty acids linked to cardiovascular benefits." },
+  { cat: "diabetes_prevention", text: "Choosing whole grains over refined grains can help moderate blood sugar response after meals." },
+  { cat: "diabetes_prevention", text: "Regular physical activity improves how effectively the body uses insulin." },
+  { cat: "diabetes_prevention", text: "Maintaining a healthy body weight is one of several factors associated with lower type 2 diabetes risk." },
+  { cat: "diabetes_prevention", text: "Pairing carbohydrates with protein or fiber can help slow down spikes in blood sugar." },
+  { cat: "weight_management", text: "Sustainable weight management is generally built on gradual, consistent habits rather than rapid extreme changes." },
+  { cat: "weight_management", text: "A moderate calorie deficit of around 500 kcal/day can support a safe weight loss pace of roughly 0.5 kg per week." },
+  { cat: "weight_management", text: "Weight can naturally fluctuate day to day due to water retention, so trends over weeks matter more than single readings." },
+  { cat: "weight_management", text: "Combining dietary changes with regular activity tends to support more durable results than diet alone." },
+  { cat: "children_nutrition", text: "Children generally benefit from a varied diet including fruits, vegetables, whole grains, and adequate protein for healthy growth." },
+  { cat: "children_nutrition", text: "Limiting sugary drinks in childhood supports healthy weight and dental health." },
+  { cat: "children_nutrition", text: "Involving children in preparing meals can encourage healthier eating habits later in life." },
+  { cat: "children_nutrition", text: "Regular family meals are associated with better dietary quality in children in several studies." },
+  { cat: "pregnancy_nutrition", text: "Folate is particularly important before and during early pregnancy to support healthy fetal development." },
+  { cat: "pregnancy_nutrition", text: "Pregnant women often need increased iron intake to support higher blood volume." },
+  { cat: "pregnancy_nutrition", text: "Staying well hydrated and eating regular balanced meals supports energy levels during pregnancy." },
+  { cat: "pregnancy_nutrition", text: "Any specific dietary changes during pregnancy should be discussed with a qualified healthcare professional." },
+  { cat: "senior_nutrition", text: "Older adults often need relatively more protein per kilogram of body weight to help preserve muscle mass." },
+  { cat: "senior_nutrition", text: "Calcium and vitamin D remain important for bone health as we age." },
+  { cat: "senior_nutrition", text: "Appetite can naturally decrease with age, making nutrient-dense food choices especially valuable." },
+  { cat: "senior_nutrition", text: "Staying socially engaged during meals can help support consistent, healthier eating patterns in older adults." },
+  { cat: "food_safety", text: "Washing hands and surfaces before food preparation helps reduce the risk of foodborne illness." },
+  { cat: "food_safety", text: "Keeping raw meat separate from ready-to-eat foods helps prevent cross-contamination." },
+  { cat: "food_safety", text: "Cooking meat and poultry to safe internal temperatures helps eliminate harmful bacteria." },
+  { cat: "food_safety", text: "Refrigerating leftovers promptly reduces the risk of bacterial growth." },
+  { cat: "vitamins", text: "Vitamin D, made in the skin with sunlight exposure, supports bone health and immune function." },
+  { cat: "vitamins", text: "Vitamin C, found in citrus fruits and peppers, supports collagen formation and immune health." },
+  { cat: "vitamins", text: "B vitamins found in whole grains, eggs, and leafy greens support energy metabolism." },
+  { cat: "vitamins", text: "Vitamin A, found in orange vegetables and leafy greens, supports vision and immune function." },
+  { cat: "minerals", text: "Iron, found in red meat, legumes and leafy greens, is essential for carrying oxygen in the blood." },
+  { cat: "minerals", text: "Calcium supports bone strength and is found in dairy, leafy greens, and fortified foods." },
+  { cat: "minerals", text: "Potassium, found in bananas and potatoes, helps regulate fluid balance and healthy blood pressure." },
+  { cat: "minerals", text: "Zinc supports immune function and wound healing, and is found in meat, seeds and legumes." },
+  { cat: "immune_system", text: "A varied diet with adequate fruits, vegetables, and protein supports normal immune system function." },
+  { cat: "immune_system", text: "Chronic lack of sleep can weaken normal immune responses over time." },
+  { cat: "immune_system", text: "Regular moderate exercise is associated with better immune function compared with a sedentary lifestyle." },
+  { cat: "immune_system", text: "Excess added sugar intake has been associated with reduced immune cell efficiency in some studies." },
+  { cat: "digestive_health", text: "A diverse diet rich in fiber supports a healthy gut microbiome." },
+  { cat: "digestive_health", text: "Fermented foods like yogurt contain live cultures that may support digestive health." },
+  { cat: "digestive_health", text: "Chewing food thoroughly aids digestion and nutrient absorption." },
+  { cat: "digestive_health", text: "Staying hydrated helps fiber do its job in supporting regular digestion." },
+  { cat: "healthy_eating", text: "A balanced plate typically includes vegetables, a source of protein, whole grains, and healthy fats." },
+  { cat: "healthy_eating", text: "Ultra-processed foods often contain higher levels of added sugar, sodium and unhealthy fats than whole foods." },
+  { cat: "healthy_eating", text: "Herbs and spices like cumin, turmeric, and cinnamon can add flavor without adding sodium or sugar." },
+  { cat: "healthy_eating", text: "Portion size, not just food choice, plays a major role in daily calorie balance." },
+  { cat: "healthy_eating", text: "Breakfast can help provide steady energy, though meal timing preferences vary between individuals." },
+  { cat: "healthy_eating", text: "Reading ingredient lists — not just the nutrition label — helps identify hidden added sugars." },
+  { cat: "hydration", text: "Older adults' sense of thirst can decline with age, making regular fluid intake habits especially important." },
+  { cat: "healthy_habits", text: "Batch-cooking healthy meals in advance can reduce reliance on convenience foods during busy weeks." },
+  { cat: "protein", text: "Eggs are considered a 'complete protein' because they contain all essential amino acids the body needs from food." },
+  { cat: "fiber", text: "Legumes like lentils and chickpeas are among the richest plant-based sources of dietary fiber." },
+  { cat: "weight_management", text: "Foods high in protein and fiber tend to be more filling per calorie than highly processed, low-fiber foods." },
+  { cat: "heart_health", text: "Trans fats, often found in some processed baked goods, are best minimized for cardiovascular health." },
+  { cat: "diabetes_prevention", text: "Sugary drinks are strongly associated with increased type 2 diabetes risk in long-term population studies." },
+  { cat: "children_nutrition", text: "Healthy snack options like fruit, nuts, or yogurt can help children meet nutrient needs between meals." },
+  { cat: "senior_nutrition", text: "Adequate fluid intake is especially important for older adults, who may be more prone to dehydration." },
+  { cat: "immune_system", text: "Garlic and ginger have long been used in traditional diets and contain compounds studied for their health properties." },
+  { cat: "digestive_health", text: "Overly restrictive diets can sometimes disrupt healthy digestion — balance and variety generally serve the gut well." },
+  { cat: "exercise", text: "Walking briskly for just 30 minutes a day is one of the simplest ways to work toward weekly activity guidelines." },
+  { cat: "sleep", text: "Heavy meals close to bedtime can sometimes interfere with sleep quality for some people." },
+  { cat: "vitamins", text: "Vitamin E, found in nuts and seeds, acts as an antioxidant that helps protect cells." },
+  { cat: "minerals", text: "Iodine, found in seafood and iodized salt, is essential for healthy thyroid function." },
+  { cat: "healthy_eating", text: "Halal dietary guidelines and general nutrition guidance can align well — for example, both emphasize wholesome, unadulterated foods." },
+  { cat: "hydration", text: "During exercise or hot weather, fluid needs increase and should be met with extra water intake." },
+  { cat: "fruits", text: "Frozen fruit, picked and frozen at peak ripeness, can be just as nutritious as fresh fruit." },
+];
+
+if (typeof module !== "undefined") module.exports = NUTRITION_FACTS;
+
+/* ==========================================================================
+   MyBodyGuide — Sample Articles
+   A working set of SEO-template articles demonstrating the full blog layout.
+   Content is educational and general — not individualized medical advice.
+   ========================================================================== */
+
+const ARTICLES = [
+  {
+    id: "protein-basics",
+    title: "Protein 101: How Much Do You Actually Need?",
+    category: "Nutrition for Non-Athletes",
+    tags: ["protein", "macros", "muscle health"],
+    author: "MyBodyGuide Editorial Team",
+    minutes: 6,
+    excerpt: "A practical, no-hype guide to daily protein needs, good sources, and simple ways to hit your target.",
+    sections: [
+      { id: "why", h: "Why Protein Matters", p: "Protein supplies the amino acids your body uses to build and repair muscle, skin, enzymes and much more. Unlike fat, the body doesn't store a large reserve of protein, so getting a steady supply from food each day matters." },
+      { id: "how-much", h: "How Much Do You Need?", p: "General population guidance often starts around 0.8 g of protein per kilogram of body weight per day for sedentary adults, with higher intakes commonly suggested for active people and older adults to help preserve muscle mass. Individual needs vary, so this is a starting point rather than a strict rule." },
+      { id: "sources", h: "Good Sources", p: "Chicken, fish, eggs, dairy, lentils, chickpeas, beans, nuts and seeds are all practical protein sources that fit easily into halal, everyday meals." },
+      { id: "spread", h: "Spreading Intake Across the Day", p: "Rather than eating most of your protein in one large meal, spreading it across breakfast, lunch and dinner may support steadier muscle maintenance throughout the day." },
+    ],
+    faq: [
+      { q: "Can I get enough protein from plants alone?", a: "Yes — combining varied plant sources like legumes, grains, nuts and seeds across the day can meet protein needs for most people." },
+      { q: "Is more protein always better?", a: "Not necessarily. Beyond a certain point, extra protein mainly displaces other nutrients rather than adding meaningful benefit for most people." },
+    ],
+  },
+  {
+    id: "sustainable-weight-loss",
+    title: "Why Slow and Steady Wins the Weight-Loss Race",
+    category: "Weight Loss",
+    tags: ["weight loss", "calorie deficit", "habits"],
+    author: "MyBodyGuide Editorial Team",
+    minutes: 7,
+    excerpt: "The science behind why a moderate calorie deficit tends to outperform crash diets over the long run.",
+    sections: [
+      { id: "deficit", h: "Understanding the Calorie Deficit", p: "Weight loss happens when you consistently eat fewer calories than your body uses. A moderate deficit — often around 500 kcal per day — can support a safe pace of roughly 0.5 kg of loss per week for many adults." },
+      { id: "why-slow", h: "Why Extreme Deficits Often Backfire", p: "Very large calorie deficits can be harder to sustain, may increase muscle loss alongside fat loss, and are more likely to trigger strong rebound hunger." },
+      { id: "habits", h: "Habits That Support the Process", p: "Regular meals, adequate protein and fiber, consistent activity, and good sleep all support a sustainable deficit without constant willpower battles." },
+    ],
+    faq: [
+      { q: "Why did my weight loss stall?", a: "Plateaus are common and can reflect water retention changes, muscle gain, or a need to reassess intake as your body weight decreases. Looking at trends over several weeks is more informative than daily changes." },
+    ],
+  },
+  {
+    id: "hydration-guide",
+    title: "How Much Water Do You Really Need Each Day?",
+    category: "Hydration",
+    tags: ["hydration", "water", "daily habits"],
+    author: "MyBodyGuide Editorial Team",
+    minutes: 5,
+    excerpt: "A clear look at daily fluid needs, signs of dehydration, and simple ways to drink more water.",
+    sections: [
+      { id: "how-much", h: "Daily Fluid Needs", p: "Needs vary with body size, activity level, and climate, but a common general reference point is roughly 30–35 ml of fluid per kilogram of body weight per day, with food contributing a meaningful share of that total." },
+      { id: "signs", h: "Signs You May Need More", p: "Dark urine, fatigue, headaches and reduced concentration can all be signs of inadequate fluid intake, especially in hot weather or during exercise." },
+      { id: "tips", h: "Simple Ways to Drink More", p: "Keeping a water bottle visible, drinking a glass with each meal, and choosing water-rich foods like cucumber and watermelon can all help." },
+    ],
+    faq: [
+      { q: "Does coffee count toward hydration?", a: "Moderate coffee and tea intake still contributes fluid overall, even though caffeine has a mild diuretic effect." },
+    ],
+  },
+  {
+    id: "athlete-nutrition",
+    title: "Fueling Performance: Nutrition Basics for Active People",
+    category: "Nutrition for Athletes",
+    tags: ["performance", "athletes", "recovery"],
+    author: "MyBodyGuide Editorial Team",
+    minutes: 8,
+    excerpt: "How carbohydrates, protein, and timing work together to support training and recovery.",
+    sections: [
+      { id: "carbs", h: "Carbohydrates as Fuel", p: "Carbohydrates are the body's preferred fuel for moderate-to-high intensity exercise, replenishing muscle glycogen used during training." },
+      { id: "protein", h: "Protein for Recovery", p: "Higher protein intake, often above general population recommendations, supports muscle repair and adaptation in people training regularly." },
+      { id: "timing", h: "Meal Timing Around Training", p: "Eating a balanced meal with carbohydrates and protein a few hours before training, and refueling afterward, can support performance and recovery." },
+    ],
+    faq: [
+      { q: "Do I need supplements to perform well?", a: "Most nutrient needs can be met through food. Supplements may help in specific situations but are not a substitute for an overall balanced diet." },
+    ],
+  },
+  {
+    id: "kids-healthy-plate",
+    title: "Building a Healthy Plate for Children",
+    category: "Children Nutrition",
+    tags: ["children", "family meals", "healthy habits"],
+    author: "MyBodyGuide Editorial Team",
+    minutes: 6,
+    excerpt: "Simple, practical ways to help children eat a varied, balanced diet without mealtime battles.",
+    sections: [
+      { id: "plate", h: "What a Balanced Plate Looks Like", p: "A helpful mental model is filling roughly half the plate with vegetables and fruit, a quarter with protein, and a quarter with whole grains or starchy vegetables." },
+      { id: "picky", h: "Handling Picky Eating", p: "Repeated, pressure-free exposure to new foods — sometimes ten or more tries — is often more effective than forcing a child to finish a food they're hesitant about." },
+      { id: "family", h: "The Power of Family Meals", p: "Eating together as a family, even a few times a week, is associated with better dietary variety and quality in children." },
+    ],
+    faq: [
+      { q: "Are snacks bad for children?", a: "Not at all — nutrient-dense snacks like fruit, yogurt or nuts can be a healthy part of a child's daily intake between meals." },
+    ],
+  },
+  {
+    id: "gut-health-basics",
+    title: "Gut Health 101: Feeding Your Microbiome",
+    category: "Digestive Health",
+    tags: ["gut health", "fiber", "fermented foods"],
+    author: "MyBodyGuide Editorial Team",
+    minutes: 6,
+    excerpt: "What the gut microbiome is, why diversity matters, and simple food choices that support it.",
+    sections: [
+      { id: "what", h: "What Is the Gut Microbiome?", p: "Your digestive tract hosts trillions of bacteria that help digest fiber, support immune function, and interact with many aspects of health." },
+      { id: "fiber", h: "Fiber Feeds Good Bacteria", p: "A varied intake of fiber from vegetables, fruits, legumes, and whole grains provides diverse fuel for beneficial gut bacteria." },
+      { id: "fermented", h: "Fermented Foods", p: "Yogurt and other fermented foods contain live cultures that may contribute positively to gut health as part of an overall balanced diet." },
+    ],
+    faq: [
+      { q: "Do I need a probiotic supplement?", a: "For most healthy adults, a varied fiber-rich diet is the foundation; supplements may be considered for specific situations, ideally with professional guidance." },
+    ],
+  },
+];
+
+if (typeof module !== "undefined") module.exports = ARTICLES;
+
+/* ==========================================================================
+   MyBodyGuide — App Logic
+   ========================================================================== */
+
+(function(){
+  "use strict";
+
+  /* ---------------- State ---------------- */
+  let currentLang = localStorage.getItem("mbg_lang") || "en";
+  let dbSort = { key: "name", dir: 1 };
+
+  /* ---------------- i18n ---------------- */
+  function getText(key){
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+    return dict[key] !== undefined ? dict[key] : (TRANSLATIONS.en[key] || key);
+  }
+
+  function applyTranslations(){
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      el.textContent = getText(el.getAttribute("data-i18n"));
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      el.placeholder = getText(el.getAttribute("data-i18n-placeholder"));
+    });
+    document.documentElement.lang = currentLang;
+    const langMeta = LANGUAGES.find(l => l.code === currentLang);
+    document.documentElement.dir = langMeta ? langMeta.dir : "ltr";
+    document.title = getText("site_name") + " — " + getText("site_subtitle");
+  }
+
+  function setLanguage(lang){
+    currentLang = lang;
+    localStorage.setItem("mbg_lang", lang);
+    applyTranslations();
+    renderFoodTable();
+    renderArticlesList();
+    renderBooks();
+    updateResultsLabelsIfVisible();
+  }
+
+  function buildLangSelector(){
+    const sel = document.getElementById("langSelect");
+    sel.innerHTML = "";
+    LANGUAGES.forEach(l => {
+      const opt = document.createElement("option");
+      opt.value = l.code; opt.textContent = l.label;
+      if (l.code === currentLang) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    sel.addEventListener("change", (e) => setLanguage(e.target.value));
+  }
+
+  /* ---------------- Routing (single-page sections) ---------------- */
+  function showPage(pageId){
+    document.querySelectorAll(".page-section").forEach(s => s.classList.remove("active"));
+    const target = document.getElementById(pageId);
+    if (target) target.classList.add("active");
+    document.querySelectorAll(".main-nav a").forEach(a => a.classList.remove("active"));
+    document.querySelectorAll('.main-nav a[data-page="' + pageId + '"]').forEach(a => a.classList.add("active"));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.getElementById("mainNav").classList.remove("open");
+  }
+
+  function initRouting(){
+    document.querySelectorAll("[data-page]").forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        showPage(el.getAttribute("data-page"));
+      });
+    });
+    document.getElementById("navToggle").addEventListener("click", () => {
+      document.getElementById("mainNav").classList.toggle("open");
+    });
+  }
+
+  /* ---------------- Calculator ---------------- */
+  function calcBMR(gender, weight, height, age){
+    // Mifflin-St Jeor Equation
+    const base = 10 * weight + 6.25 * height - 5 * age;
+    return gender === "male" ? base + 5 : base - 161;
+  }
+
+  const ACTIVITY_FACTORS = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, athlete: 1.9 };
+
+  function bmiCategory(bmi){
+    if (bmi < 18.5) return { key: "bmi_under", color: "var(--blue-500)" };
+    if (bmi < 25) return { key: "bmi_normal", color: "var(--green-600)" };
+    if (bmi < 30) return { key: "bmi_over", color: "#F2B84B" };
+    return { key: "bmi_obese", color: "var(--danger)" };
+  }
+
+  function idealWeightRange(heightCm){
+    const h = heightCm / 100;
+    return { low: 18.5 * h * h, high: 24.9 * h * h };
+  }
+
+  function runCalculator(e){
+    e.preventDefault();
+    const gender = document.querySelector('input[name="gender"]:checked').value;
+    const age = parseFloat(document.getElementById("calcAge").value);
+    const height = parseFloat(document.getElementById("calcHeight").value);
+    const weight = parseFloat(document.getElementById("calcWeight").value);
+    const activity = document.getElementById("calcActivity").value;
+    const goal = document.querySelector('input[name="goal"]:checked').value;
+
+    if (!age || !height || !weight) return;
+
+    const bmi = weight / Math.pow(height / 100, 2);
+    const bmr = calcBMR(gender, weight, height, age);
+    const tdee = bmr * ACTIVITY_FACTORS[activity];
+
+    let calorieTarget = tdee;
+    let weeklyChangeKg = 0;
+    const SAFE_DEFICIT = 500; // kcal/day -> ~0.5kg/week, within widely-cited safe range
+    const SAFE_SURPLUS = 350; // kcal/day -> modest, muscle-friendly surplus
+
+    if (goal === "lose") { calorieTarget = tdee - SAFE_DEFICIT; weeklyChangeKg = -0.45; }
+    else if (goal === "gain") { calorieTarget = tdee + SAFE_SURPLUS; weeklyChangeKg = 0.3; }
+    else { weeklyChangeKg = 0; }
+
+    // Never let recommended intake fall dangerously low
+    const floor = gender === "male" ? 1500 : 1200;
+    if (calorieTarget < floor) calorieTarget = floor;
+
+    const water = weight * 0.033; // liters/day (~33ml/kg)
+    const proteinPerKg = goal === "lose" ? 1.8 : goal === "gain" ? 1.8 : 1.4;
+    const proteinG = weight * proteinPerKg;
+    const fatCal = calorieTarget * 0.28;
+    const fatG = fatCal / 9;
+    const proteinCal = proteinG * 4;
+    const carbCal = Math.max(calorieTarget - proteinCal - fatCal, 0);
+    const carbG = carbCal / 4;
+
+    const ideal = idealWeightRange(height);
+    const idealMid = (ideal.low + ideal.high) / 2;
+    const diff = weight - idealMid;
+    let weeks = null;
+    if (goal !== "maintain" && Math.abs(weeklyChangeKg) > 0) {
+      weeks = Math.abs(diff / weeklyChangeKg);
+    }
+
+    renderResults({
+      bmi, bmr, tdee, calorieTarget, water, proteinG, carbG, fatG,
+      weeklyChangeKg, monthlyChangeKg: weeklyChangeKg * 4.33,
+      ideal, weight, diff, weeks, goal
+    });
+  }
+
+  let lastResults = null;
+
+  function renderResults(r){
+    lastResults = r;
+    const panel = document.getElementById("resultsPanel");
+    panel.classList.remove("hidden");
+    const cat = bmiCategory(r.bmi);
+
+    document.getElementById("res-bmi").textContent = r.bmi.toFixed(1);
+    document.getElementById("res-bmi-cat").textContent = getText(cat.key);
+    document.getElementById("res-bmi-cat").style.color = cat.color;
+    document.getElementById("res-ideal").innerHTML = r.ideal.low.toFixed(1) + " – " + r.ideal.high.toFixed(1) + " <small>kg</small>";
+    document.getElementById("res-bmr").innerHTML = Math.round(r.bmr) + " <small>kcal/day</small>";
+    document.getElementById("res-tdee").innerHTML = Math.round(r.tdee) + " <small>kcal/day</small>";
+    document.getElementById("res-calories").innerHTML = Math.round(r.calorieTarget) + " <small>kcal/day</small>";
+    document.getElementById("res-water").innerHTML = r.water.toFixed(1) + " <small>L/day</small>";
+    document.getElementById("res-weekly").innerHTML = (r.weeklyChangeKg >= 0 ? "+" : "") + r.weeklyChangeKg.toFixed(2) + " <small>kg/week</small>";
+    document.getElementById("res-monthly").innerHTML = (r.monthlyChangeKg >= 0 ? "+" : "") + r.monthlyChangeKg.toFixed(2) + " <small>kg/month</small>";
+    document.getElementById("res-current").innerHTML = r.weight.toFixed(1) + " <small>kg</small>";
+    document.getElementById("res-diff").innerHTML = (r.diff >= 0 ? "" : "") + Math.abs(r.diff).toFixed(1) + " <small>kg</small>";
+    document.getElementById("res-time").textContent = r.weeks ? (Math.round(r.weeks)) + " " + getText("res_weeks") + " (~" + (r.weeks/4.33).toFixed(1) + " " + getText("res_months") + ")" : "—";
+
+    const totalMacroCal = (r.proteinG*4) + (r.carbG*4) + (r.fatG*9);
+    setMacroBar("protein", r.proteinG, r.proteinG*4/totalMacroCal*100);
+    setMacroBar("carbs", r.carbG, r.carbG*4/totalMacroCal*100);
+    setMacroBar("fat", r.fatG, r.fatG*9/totalMacroCal*100);
+
+    const advice = document.getElementById("res-advice");
+    advice.textContent = getText("advice_" + r.goal);
+
+    const progressPct = Math.max(5, Math.min(100, 100 - (Math.abs(r.diff) / (r.weight||1) * 100)));
+    document.getElementById("progressFill").style.width = progressPct + "%";
+
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function setMacroBar(type, grams, pct){
+    document.getElementById("macro-" + type + "-val").textContent = Math.round(grams) + " g";
+    document.getElementById("macro-" + type + "-fill").style.width = pct + "%";
+  }
+
+  function updateResultsLabelsIfVisible(){
+    if (lastResults) renderResults(lastResults);
+  }
+
+  function resetCalculator(){
+    document.getElementById("calculatorForm").reset();
+    document.getElementById("resultsPanel").classList.add("hidden");
+    lastResults = null;
+  }
+
+  /* ---------------- Food Database ---------------- */
+  function uniqueCategories(){
+    return [...new Set(FOOD_DATABASE.map(f => f.category))];
+  }
+
+  function buildCategoryFilter(){
+    const sel = document.getElementById("dbCategoryFilter");
+    sel.innerHTML = '<option value="">' + getText("db_all_categories") + "</option>";
+    uniqueCategories().forEach(cat => {
+      const opt = document.createElement("option");
+      opt.value = cat;
+      opt.textContent = cat.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      sel.appendChild(opt);
+    });
+  }
+
+  function renderFoodTable(){
+    const tbody = document.getElementById("dbTableBody");
+    if (!tbody) return;
+    const search = (document.getElementById("dbSearch").value || "").toLowerCase();
+    const cat = document.getElementById("dbCategoryFilter").value;
+
+    let rows = FOOD_DATABASE.filter(f => {
+      const matchesSearch = f.name.toLowerCase().includes(search);
+      const matchesCat = !cat || f.category === cat;
+      return matchesSearch && matchesCat;
+    });
+
+    rows.sort((a,b) => {
+      const av = a[dbSort.key], bv = b[dbSort.key];
+      if (typeof av === "string") return av.localeCompare(bv) * dbSort.dir;
+      return (av - bv) * dbSort.dir;
+    });
+
+    tbody.innerHTML = "";
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:32px;">' + getText("db_no_results") + "</td></tr>";
+      return;
+    }
+
+    rows.forEach(f => {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        '<td class="food-name">' + f.name + '<span class="cat-tag">' + f.category.replace(/_/g," ") + '</span></td>' +
+        '<td>' + f.serving + '</td>' +
+        '<td>' + f.kcal + '</td>' +
+        '<td>' + f.protein + '</td>' +
+        '<td>' + f.carbs + '</td>' +
+        '<td>' + f.fat + '</td>' +
+        '<td>' + f.fiber + '</td>' +
+        '<td>' + f.sugar + '</td>' +
+        '<td>' + f.sodium + '</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  function initDatabaseControls(){
+    buildCategoryFilter();
+    document.getElementById("dbSearch").addEventListener("input", renderFoodTable);
+    document.getElementById("dbCategoryFilter").addEventListener("change", renderFoodTable);
+    document.querySelectorAll("#dbTable thead th[data-sort]").forEach(th => {
+      th.addEventListener("click", () => {
+        const key = th.getAttribute("data-sort");
+        dbSort.dir = (dbSort.key === key) ? dbSort.dir * -1 : 1;
+        dbSort.key = key;
+        renderFoodTable();
+      });
+    });
+    renderFoodTable();
+  }
+
+  /* ---------------- Nutrition Wheel ---------------- */
+  let usedFactIndexes = [];
+  let isSpinning = false;
+
+  function buildWheelSVG(){
+    const svg = document.getElementById("wheelSvg");
+    const colors = ["#159A5B","#2FBE7E","#1C7FD1","#3AA0E8","#0E7A47","#155F9E"];
+    const segments = 12;
+    const cx = 180, cy = 180, r = 170;
+    let paths = "";
+    for (let i = 0; i < segments; i++){
+      const startAngle = (i / segments) * 2 * Math.PI - Math.PI/2;
+      const endAngle = ((i+1) / segments) * 2 * Math.PI - Math.PI/2;
+      const x1 = cx + r * Math.cos(startAngle), y1 = cy + r * Math.sin(startAngle);
+      const x2 = cx + r * Math.cos(endAngle), y2 = cy + r * Math.sin(endAngle);
+      paths += `<path d="M${cx},${cy} L${x1.toFixed(2)},${y1.toFixed(2)} A${r},${r} 0 0,1 ${x2.toFixed(2)},${y2.toFixed(2)} Z" fill="${colors[i % colors.length]}" stroke="#fff" stroke-width="2"/>`;
+    }
+    svg.innerHTML = paths + `<circle cx="${cx}" cy="${cy}" r="30" fill="#fff" stroke="#DCEEE6" stroke-width="3"/>`;
+  }
+
+  function spinWheel(){
+    if (isSpinning) return;
+    isSpinning = true;
+    const svg = document.getElementById("wheelSvg");
+    const spinBtn = document.getElementById("spinBtn");
+    spinBtn.disabled = true;
+    spinBtn.textContent = getText("wheel_spinning");
+
+    if (usedFactIndexes.length >= NUTRITION_FACTS.length) usedFactIndexes = [];
+    let idx;
+    do { idx = Math.floor(Math.random() * NUTRITION_FACTS.length); } while (usedFactIndexes.includes(idx));
+    usedFactIndexes.push(idx);
+
+    const currentRotation = svg._rotation || 0;
+    const extraSpins = 6 + Math.random() * 2;
+    const finalRotation = currentRotation + extraSpins * 360 + Math.random() * 360;
+    svg._rotation = finalRotation;
+    svg.style.transform = `rotate(${finalRotation}deg)`;
+
+    setTimeout(() => {
+      const fact = NUTRITION_FACTS[idx];
+      document.getElementById("factTag").textContent = fact.cat.replace(/_/g," ");
+      document.getElementById("factText").textContent = fact.text;
+      document.getElementById("factCard").classList.remove("hidden");
+      launchConfetti();
+      isSpinning = false;
+      spinBtn.disabled = false;
+      spinBtn.textContent = getText("wheel_spin");
+    }, 4600);
+  }
+
+  function launchConfetti(){
+    const canvas = document.getElementById("confettiCanvas");
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const ctx = canvas.getContext("2d");
+    const colors = ["#159A5B","#2FBE7E","#1C7FD1","#3AA0E8","#F2B84B"];
+    const pieces = Array.from({length: 90}, () => ({
+      x: Math.random() * canvas.width, y: -20 - Math.random()*100,
+      size: 4 + Math.random()*6, color: colors[Math.floor(Math.random()*colors.length)],
+      speed: 2 + Math.random()*3, drift: -1 + Math.random()*2, rot: Math.random()*360, rotSpeed: -6+Math.random()*12
+    }));
+    let frame = 0;
+    function draw(){
+      frame++;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        p.y += p.speed; p.x += p.drift; p.rot += p.rotSpeed;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot * Math.PI/180);
+        ctx.fillStyle = p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+        ctx.restore();
+      });
+      if (frame < 130) requestAnimationFrame(draw);
+      else ctx.clearRect(0,0,canvas.width,canvas.height);
+    }
+    draw();
+  }
+
+  /* ---------------- Articles ---------------- */
+  function renderArticlesList(){
+    const grid = document.getElementById("articlesGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    ARTICLES.forEach(a => {
+      const card = document.createElement("article");
+      card.className = "article-card fade-up";
+      card.innerHTML = `
+        <div class="article-img"></div>
+        <div class="article-body">
+          <div class="article-cat">${a.category}</div>
+          <h3>${a.title}</h3>
+          <div class="article-meta">
+            <span>${getText("articles_by")} ${a.author}</span>
+            <span>${a.minutes} ${getText("articles_min_read")}</span>
+          </div>
+          <p>${a.excerpt}</p>
+          <button class="btn btn-secondary btn-sm" data-article="${a.id}">${getText("articles_read")}</button>
+        </div>`;
+      grid.appendChild(card);
+    });
+    grid.querySelectorAll("[data-article]").forEach(btn => {
+      btn.addEventListener("click", () => openArticle(btn.getAttribute("data-article")));
+    });
+  }
+
+  function openArticle(id){
+    const a = ARTICLES.find(x => x.id === id);
+    if (!a) return;
+    const container = document.getElementById("articleDetail");
+    const related = ARTICLES.filter(x => x.id !== id).slice(0,3);
+    container.innerHTML = `
+      <a href="#" class="back-link" data-page="page-articles">&larr; ${getText("articles_title")}</a>
+      <div class="article-full">
+        <div class="article-cat">${a.category}</div>
+        <h1>${a.title}</h1>
+        <div class="article-meta">
+          <span>${getText("articles_by")} ${a.author}</span>
+          <span>${a.minutes} ${getText("articles_min_read")}</span>
+        </div>
+        <div class="article-img"></div>
+        <div class="toc-box">
+          <strong>${getText("articles_toc")}</strong>
+          ${a.sections.map(s => `<a href="#sec-${s.id}">${s.h}</a>`).join("")}
+        </div>
+        ${a.sections.map(s => `<h3 id="sec-${s.id}">${s.h}</h3><p>${s.p}</p>`).join("")}
+        <div class="tag-list">${a.tags.map(t => `<span class="tag-chip">#${t}</span>`).join("")}</div>
+        <h3>${getText("articles_faq")}</h3>
+        ${a.faq.map(f => `<div class="faq-item"><h4>${f.q}</h4><p>${f.a}</p></div>`).join("")}
+        <div class="share-row" aria-label="${getText('articles_share')}">
+          <span class="share-btn">in</span><span class="share-btn">f</span><span class="share-btn">X</span>
+        </div>
+        <h3>${getText("articles_related")}</h3>
+        <div class="articles-grid">
+          ${related.map(r => `
+            <article class="article-card">
+              <div class="article-img"></div>
+              <div class="article-body">
+                <div class="article-cat">${r.category}</div>
+                <h3>${r.title}</h3>
+                <button class="btn btn-secondary btn-sm" data-article="${r.id}">${getText("articles_read")}</button>
+              </div>
+            </article>`).join("")}
+        </div>
+      </div>`;
+    container.querySelectorAll("[data-article]").forEach(btn => {
+      btn.addEventListener("click", () => openArticle(btn.getAttribute("data-article")));
+    });
+    container.querySelectorAll("[data-page]").forEach(el => {
+      el.addEventListener("click", (e) => { e.preventDefault(); showPage(el.getAttribute("data-page")); });
+    });
+    showPage("page-article-detail");
+  }
+
+  /* ---------------- Digital Books ---------------- */
+  const BOOKS = [
+    { id:"b1", title:"The Halal Kitchen: 60 Everyday Healthy Recipes", price:"$12.99", tag:"featured" },
+    { id:"b2", title:"Understanding Your Metabolism", price:"$9.99", tag:"featured" },
+    { id:"b3", title:"Meal Prep Made Simple", price:"$7.99", tag:"new" },
+    { id:"b4", title:"Family Nutrition Handbook", price:"$14.99", tag:"new" },
+    { id:"b5", title:"Strength & Nutrition for Everyday Athletes", price:"$11.99", tag:"bestseller" },
+    { id:"b6", title:"Mindful Eating, Lasting Habits", price:"$8.99", tag:"bestseller" },
+  ];
+
+  function renderBooks(){
+    const grid = document.getElementById("booksGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    BOOKS.forEach(b => {
+      const card = document.createElement("div");
+      card.className = "book-card";
+      card.innerHTML = `
+        <div class="book-cover"><span>${b.title}</span></div>
+        <div class="book-body">
+          <h4>${b.title}</h4>
+          <div class="book-price">${b.price}</div>
+          <div class="book-actions">
+            <button class="btn btn-primary btn-sm">${getText("books_buy")}</button>
+            <button class="btn btn-secondary btn-sm">${getText("books_download")}</button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------------- Contact Form ---------------- */
+  function validateField(input){
+    const errEl = document.getElementById(input.id + "-error");
+    let valid = true, msg = "";
+    if (!input.value.trim()) { valid = false; msg = getText("contact_error_required"); }
+    else if (input.type === "email") {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!re.test(input.value)) { valid = false; msg = getText("contact_error_email"); }
+    }
+    if (errEl) { errEl.textContent = msg; errEl.classList.toggle("show", !valid); }
+    input.classList.toggle("invalid", !valid);
+    return valid;
+  }
+
+  function initContactForm(){
+    const form = document.getElementById("contactForm");
+    if (!form) return;
+    const fields = ["contactName","contactEmail","contactSubject","contactMessage"];
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener("blur", () => validateField(el));
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let allValid = true;
+      fields.forEach(id => { if (!validateField(document.getElementById(id))) allValid = false; });
+      if (!allValid) return;
+      document.getElementById("contactSuccess").classList.add("show");
+      form.reset();
+      setTimeout(() => document.getElementById("contactSuccess").classList.remove("show"), 6000);
+    });
+  }
+
+  /* ---------------- Animated Counters ---------------- */
+  function animateCounters(){
+    document.querySelectorAll("[data-counter]").forEach(el => {
+      const target = parseInt(el.getAttribute("data-counter"), 10);
+      let current = 0;
+      const step = Math.max(1, Math.round(target / 60));
+      const t = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(t); }
+        el.textContent = current.toLocaleString() + (el.hasAttribute("data-counter-suffix") ? el.getAttribute("data-counter-suffix") : "");
+      }, 20);
+    });
+  }
+
+  /* ---------------- Init ---------------- */
+  document.addEventListener("DOMContentLoaded", () => {
+    buildLangSelector();
+    applyTranslations();
+    initRouting();
+    document.getElementById("calculatorForm").addEventListener("submit", runCalculator);
+    document.getElementById("resetBtn").addEventListener("click", resetCalculator);
+    initDatabaseControls();
+    buildWheelSVG();
+    document.getElementById("spinBtn").addEventListener("click", spinWheel);
+    renderArticlesList();
+    renderBooks();
+    initContactForm();
+    animateCounters();
+    document.getElementById("yearNow").textContent = new Date().getFullYear();
+    showPage("page-home");
+  });
+
+})();
+
+</script>
+</body>
+</html>
